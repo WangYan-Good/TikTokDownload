@@ -1,9 +1,12 @@
 # 激活虚拟环境
 . venv/bin/activate
 
+# 升级 pip
+python3 -m pip install --upgrade pip
+
 # 编译安装 F2 模块
 WORKSPACE=${PWD}
-cd ../f2
+cd ./f2
 pip install -e .
 cd ${WORKSPACE}
 
