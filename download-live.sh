@@ -1,0 +1,1 @@
+python3 TikTokTool.py -u https://v.douyin.com/iYh16bjb/ -i all
