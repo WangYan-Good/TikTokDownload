@@ -11,6 +11,7 @@ else
         echo "激活成功！"
     else
         echo "激活失败！"
+        exit 1
     fi
 fi
 
