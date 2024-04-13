@@ -1,6 +1,3 @@
-import os
-import sys
-from urllib.parse import unquote
 import re
 
 # config file path
@@ -10,13 +7,13 @@ CONFIG_FILE = "Conf/conf.ini"
 SECTION_REGULAR = "\[(.*?)\]"
 URL_REQULAR = "https?://\S+"
 
-class Conf ():
+class Config ():
 
   def __init__(self) -> None:
     self.section = list()
     self.url_list = list(list())
 
-  def configParser (self, file:str):
+  def configParser (self, file:str=CONFIG_FILE):
     SiftedContext = object()
     SectionName = str()
     SectionFound = False
@@ -57,7 +54,6 @@ class Conf ():
         # append url into url_list
         UrlList.append(Url[0])
         continue
-      # print("{section_name}:{section_list}".format(section_name=SectionName, section_list=UrlList))
     self.url_list.append(UrlList.copy())
   
   def getConfigList(self, SectionName:str):
@@ -69,9 +65,3 @@ class Conf ():
       return self.url_list[SectionIndex]
     else:
       return None
-
-if __name__ == "__main__":
-  config = Conf()
-  config.configParser(CONFIG_FILE)
-  post_list = config.getConfigList("post")
-  print(post_list)
