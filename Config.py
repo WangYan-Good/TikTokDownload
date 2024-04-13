@@ -9,11 +9,12 @@ URL_REQULAR = "https?://\S+"
 
 class Config ():
 
-  def __init__(self) -> None:
+  def __init__(self, file:str=CONFIG_FILE) -> None:
     self.section = list()
     self.url_list = list(list())
+    self._configParser(file)
 
-  def configParser (self, file:str=CONFIG_FILE):
+  def _configParser (self, file:str=CONFIG_FILE):
     SiftedContext = object()
     SectionName = str()
     SectionFound = False

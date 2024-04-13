@@ -1,1 +1,0 @@
-python3 TikTokTool.py -c ./f2/f2/conf/app.yaml
