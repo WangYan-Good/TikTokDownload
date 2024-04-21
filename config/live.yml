@@ -1,0 +1,15 @@
+live:
+  headers:
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+    Referer: https://www.douyin.com/
+  live_link_share: https://v.douyin.com/iFeavMJ4/
+  response_url:
+  web_rid:
+  room_id:
+  title:
+  nickname:
+  user_count_str: 
+  total_user_str:
+  status:
+  flv_pull_url:
+  hls_pull_url_map:
