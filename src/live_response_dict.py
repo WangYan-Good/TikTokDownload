@@ -4,8 +4,6 @@ import sys
 WORK_SPACE = os.path.dirname(sys.path[0])
 sys.path.append(os.path.join(WORK_SPACE))
 ##<< test
-import f2
-from f2.utils.conf_manager import ConfigManager
 
 from pathlib import Path
 import yaml
