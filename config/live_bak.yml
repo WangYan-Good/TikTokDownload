@@ -1,8 +1,8 @@
 live:
-  PC_headers:
-    Referer: https://live.douyin.com/
-    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-      like Gecko) Chrome/104.0.0.0 Safari/537.36
+  headers:
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+    Referer: https://www.douyin.com/
+  live_link_share: https://v.douyin.com/iFeavMJ4/
   cookie: FOLLOW_LIVE_POINT_INFO=%22MS4wLjABAAAA4Md_rLi7sUqmSZV9C5-_ez2pu20RhErzFN6szJy8-TM%2F1712548800000%2F0%2F1712486487626%2F0%22;
     FORCE_LOGIN=%7B%22videoConsumedRemainSeconds%22%3A180%7D; IsDouyinActive=true;
     LOGIN_STATUS=1; __security_server_data_status=1; _bd_ticket_crypt_cookie=8ca6a6fe3a9ce197c4ce8b4e754d72d3;
@@ -32,65 +32,14 @@ live:
     csrf_session_id=9750084836f0ee25f5dad83576c81dce; device_web_cpu_core=16; device_web_memory_size=-1;
     dy_sheight=1080; dy_swidth=1920; tt_scid=UmcfqyNrP07Fyrn9f8Rr9Z.yQkzBh2CBm00J-nO9ewyzoYknAk5-EktqRSUqslsS174a;
     ttcid=d6d75c350e8547c6bdfb6becf54760d228; xgplayer_user_id=779116200301
-  flv_pull_url: null
-  headers:
-    Referer: https://www.douyin.com/
-    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-      like Gecko) Chrome/104.0.0.0 Safari/537.36
-  hls_pull_url_map: null
-  live_link_share: https://v.douyin.com/iYsgDpLB/
-  nickname: null
   response_url:
-    netloc: webcast.amemv.com
-    params: ''
-    path: /douyin/webcast/reflow/7359941191225363219
-    query:
-      app:
-      - aweme
-      did:
-      - MS4wLjABAAAAT0W1apCqYj7QR0wSGWlbDgYEAwgMVFjr3fakADqRoTI
-      extra_params:
-      - '{"im_channel_invite_id":"","shop_guide_id":"","enable_replay":1,"live_common_share_params":"{"bcm":"{"bcm_share_id":"7359942350745075987"}"}","life_extra_info":"{"live_play_id":"","live_play_share_id":"","live_share_coupon_id":""}","from_request_id":"202404202134467D46DCB0938EA0191E5C","share_platform":"copy","vs_episode_sub_type":"unknown","vs_episode_id":0}'
-      iid:
-      - MS4wLjABAAAAcWSLMLsUzvgBQmsged4bkRl959zabKPHHwmWj_dZj5c
-      sec_user_id: &id002
-      - MS4wLjABAAAAHk13avLp_bT5mqBNDCE5gRQ9OKuywrMSC8YXQsEMOyA
-      share_extra_params:
-      - '{"enable_replay":1}'
-      tt_from:
-      - copy
-      u_code:
-      - ki64k3a1
-      utm_campaign:
-      - client_share
-      utm_medium:
-      - ios
-      utm_source:
-      - copy
-      with_sec_did:
-      - '1'
-    scheme: https
-  rid: true
-  room_id: &id001
-  - '7359941191225363219'
-  status: null
-  title: null
-  total_user_str: null
-  user_count_str: null
-  web_rid: null
-params:
-  X-Bogus:
-  - https://webcast.amemv.com/douyin/webcast/reflow/7359941191225363219?iid=MS4wLjABAAAAcWSLMLsUzvgBQmsged4bkRl959zabKPHHwmWj_dZj5c&utm_source=copy&tt_from=copy&extra_params=%7B%22im_channel_invite_id%22:%22%22,%22shop_guide_id%22:%22%22,%22enable_replay%22:1,%22live_common_share_params%22:%22%7B%5C%22bcm%5C%22:%5C%22%7B%5C%5C%5C%22bcm_share_id%5C%5C%5C%22:%5C%5C%5C%227359942350745075987%5C%5C%5C%22%7D%5C%22%7D%22,%22life_extra_info%22:%22%7B%5C%22live_play_id%5C%22:%5C%22%5C%22,%5C%22live_play_share_id%5C%22:%5C%22%5C%22,%5C%22live_share_coupon_id%5C%22:%5C%22%5C%22%7D%22,%22from_request_id%22:%22202404202134467D46DCB0938EA0191E5C%22,%22share_platform%22:%22copy%22,%22vs_episode_sub_type%22:%22unknown%22,%22vs_episode_id%22:0%7D&utm_medium=ios&with_sec_did=1&sec_user_id=MS4wLjABAAAAHk13avLp_bT5mqBNDCE5gRQ9OKuywrMSC8YXQsEMOyA&utm_campaign=client_share&u_code=ki64k3a1&app=aweme&did=MS4wLjABAAAAT0W1apCqYj7QR0wSGWlbDgYEAwgMVFjr3fakADqRoTI&share_extra_params=%7B%22enable_replay%22:1%7D&X-Bogus=DFSzswVYyG2ANHT3tl3t5F9WX7rm
-  - DFSzswVYyG2ANHT3tl3t5F9WX7rm
-  - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
-    Chrome/104.0.0.0 Safari/537.36
-  app_id: '1128'
-  live_api: https://live.douyin.com/webcast/room/web/enter/
-  live_api_share: https://webcast.amemv.com/webcast/room/reflow/info/
-  live_id: '1'
-  msToken: Gb5eXR9uT66_OjQTdyUUVuFaWfNhEkT32NiBOOvixVffDDatOxddltly09OgHBpHnJzjwcYwro8_yvSx9a5-JckKz3wfBh2fbGIQYzQwNYvRImafBW8Evi0TBvDAFw==
-  room_id: *id001
-  sec_user_id: *id002
-  type_id: '0'
-  verifyFp: verify_lw2zfq5l_xyo7gmkx_2HpV_4QAn_9WTg_ptAelPfSizCp
-  version_code: 99.99.99
+  rid: False
+  web_rid:
+  room_id:
+  title:
+  nickname:
+  user_count_str: 
+  total_user_str:
+  status:
+  flv_pull_url:
+  hls_pull_url_map:

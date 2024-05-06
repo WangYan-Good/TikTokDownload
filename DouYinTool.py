@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
+import os
 import sys
 import time
+WORK_SPACE = os.path.dirname(sys.path[0])
+sys.path.append(os.path.join(WORK_SPACE))
 from f2.cli.cli_console import RichConsoleManager as RCManager
 
 
