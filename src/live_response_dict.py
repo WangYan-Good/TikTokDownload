@@ -3,6 +3,7 @@ import os
 import sys
 WORK_SPACE = os.path.dirname(sys.path[0])
 sys.path.append(os.path.join(WORK_SPACE))
+import json
 ##<< test
 
 from pathlib import Path
@@ -14,10 +15,14 @@ from random import randint
 
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
-import yaml
+
+from re import compile
 
 LIVE_CONFIG_PATH = "config/live.yml"
 MAX_TIMEOUT = 10
+
+room_id_live_path = compile(r"/douyin/webcast/reflow/\S+")
+room_id = compile(r"/douyin/webcast/reflow/(\S+)")
 
 class Live():
   
@@ -34,6 +39,26 @@ class Live():
     
     # request response url
     self.live_config["live"]["response_url"] = self.get_response_url(url)
+    # print(self.live_config["live"]["response_url"]) 
+    # https://live.douyin.com/781763336930?room_id=7342521940575374106&enter_from_merge=web_share_link&enter_method=web_share_link&previous_page=app_code_link
+    
+
+    # make sure root_id/web_rid
+    if (u:=room_id_live_path.findall(self.live_config["live"]["response_url"]["path"])) is not None:
+      self.live_config["live"]["rid"] = True
+      self.live_config["live"]["room_id"] = room_id.findall(self.live_config["live"]["response_url"]["path"])
+      self.live_config["live"]["web_rid"] = None
+    else:
+      self.live_config["live"]["rid"] = False
+      self.live_config["live"]["room_id"] = None
+      self.live_config["live"]["web_rid"] = room_id.findall(self.live_config["live"]["response_url"]["path"])
+
+    # self.update_config()
+  
+  def update_config(self):
+    # save yaml config
+    with open(LIVE_CONFIG_PATH, 'w') as f:
+      yaml.safe_dump(self.live_config, f)
   
   def get_response_url(self, share_url:str) -> dict:
     response_url = dict()
@@ -72,5 +97,5 @@ class Live():
     pass
 
 if __name__ == "__main__":
-  live_config = Live("https://v.douyin.com/iF32SFoa/")
+  live_config = Live("https://v.douyin.com/iFemNNTW/")
   print(live_config.live_config)

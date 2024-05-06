@@ -33,6 +33,34 @@ from urllib.parse import urlparse
 
 from src.live_response_dict import Live
 import yaml
+from src.DataAcquirer import Live as lv
+from src.extract import Extractor
+
+from f2.apps.douyin.utils import (
+    SecUserIdFetcher,
+    AwemeIdFetcher,
+    MixIdFetcher,
+    WebCastIdFetcher,
+    VerifyFpManager,
+    create_or_rename_user_folder,
+    show_qrcode,
+)
+
+from f2.apps.douyin.filter import (
+    UserPostFilter,
+    UserProfileFilter,
+    UserCollectionFilter,
+    UserCollectsFilter,
+    UserMusicCollectionFilter,
+    UserMixFilter,
+    PostDetailFilter,
+    UserLiveFilter,
+    UserLive2Filter,
+    GetQrcodeFilter,
+    CheckQrcodeFilter,
+    UserFollowingFilter,
+    UserFollowerFilter,
+)
 
 #download post command
 COMMAND_DOWNLOAD_POST = "python3 DouYinTool.py -c ./f2/f2/conf/app.yaml"
@@ -107,6 +135,57 @@ def init_f2_config()->dict:
     # ttwid
     config.setdefault("ttwid", {})
 
+async def fetch_user_live_videos(
+    kwargs,
+    webcast_id: str,
+) -> UserLiveFilter:
+    """
+    用于获取指定用户直播列表。
+    (Used to get the list of videos collected by the specified user.)
+
+    Args:
+        webcast_id: str: 直播ID (Live ID)
+
+    Return:
+        webcast_data: dict: 直播数据字典，包含直播ID、直播标题、直播状态、观看人数、子分区、主播昵称
+        (Live data dict, including live ID, live title, live status, number of viewers,
+        sub-partition, anchor nickname)
+    """
+
+    print(("开始爬取直播: {0} 的数据").format(webcast_id))
+    print("===================================")
+
+    async with DouyinCrawler(kwargs) as crawler:
+        params = UserLive(web_rid=webcast_id, room_id_str="")
+        response = await crawler.fetch_live(params)
+        live = UserLiveFilter(response)
+
+    print(
+        ("直播ID: {0} 直播标题: {1} 直播状态: {2} 观看人数: {3}").format(
+            live.room_id, live.live_title, live.live_status, live.user_count
+        )
+    )
+    print(
+        ("子分区: {0} 主播昵称: {1}").format(
+            live.sub_partition_title, live.nickname
+        )
+    )
+    print("===================================")
+    print(("直播信息爬取结束"))
+
+    return live
+
+# def generate_live_data(data: dict) -> dict:
+#     return {
+#         "text": "\n".join((f"直播标题: {data["title"]}",
+#                             f"主播昵称: {data["nickname"]}",
+#                             f"在线观众: {data["user_count_str"]}",
+#                             f"观看次数: {data["total_user_str"]}",)),
+#         "flv": data["flv_pull_url"],
+#         "m3u8": data["hls_pull_url_map"],
+#         "best": list(data["flv_pull_url"].values())[0],
+#         "preview": data["cover"]}
+
 if __name__ == "__main__":
     live_config = dict()
 
@@ -117,6 +196,9 @@ if __name__ == "__main__":
     # set f2 config as default
     # config = init_f2_config()
     config = dict()
+
+    # initialize app config
+    douyin_conf = ConfigManager(f2.APP_CONFIG_FILE_PATH).get_config("douyin")
     
     # initialize headers
     f2_manager = ConfigManager(f2.F2_CONFIG_FILE_PATH)
@@ -140,28 +222,27 @@ if __name__ == "__main__":
         one_url = live_share_url
         try:
             live_config = Live(one_url)
-            # print(dict(live_config.live_config).keys())
-            live_config.live_config["live"]["headers"] = f2_conf["headers"]
-            # print(live_config.live_config)
-            respone = request ("get", one_url, timeout=10, headers=live_config.live_config["live"]["headers"])
-            # # 随机延时
-            sleep(randint(15, 45) * 0.1)
-            live_config.live_config["live"]["response_url"] = respone.url
-            # print(respone.url)
-            # print(type(respone.url))
-            print(type(urlparse(respone.url)))
-            url = str(parse_qs(urlparse(respone.url).query)).replace("\\", "")
-            url = yaml.safe_load(url)
-            # print(url)
 
-            # # 解析直播链接
-            if u := live_link.findall(respone.url):
-                params = generate_live_params(True, u)
-            elif u := live_link_self.findall(respone.url):
-                params = generate_live_params(True, u)
-            elif u := live_link_share.findall(respone.url):
-                params = generate_live_params(False, extract_sec_user_id(u))
+            # make live mode
+            if live_config.live_config["live"]["rid"] is True and live_config.live_config["live"]["room_id"] is not None:
+                live_data = lv(params=None, room_id=live_config.live_config["live"]["room_id"], sec_user_id=live_config.live_config["live"]["response_url"]["query"]["sec_user_id"], cookie=douyin_conf["cookie"]).run()
+                live_data = Extractor().run(live_data, None, "live")[0]
+            else:
+            # 然后下载直播推流
+            # web_id or room_id+sec_user_id
+              pass
+            # webcast_data = await fetch_user_live_videos(live_config.live_config["web_rid"])
+            # receive live data
+            if not all(live_data):
+                print("have no receive any live data")
+                exit(1)
+            if live_data["status"] == 4:
+                print("received live data status error")
+                exit(1)
+            # generate_live_data(live_data)
+            print(live_data)
             break
+        
         except (
                 exceptions.ProxyError,
                 exceptions.SSLError,
@@ -172,6 +253,6 @@ if __name__ == "__main__":
             continue
         # print("{url} = {reurl}".format(url=one_url, reurl=respone.url))
         # print(params)
-    # print(live_config.live_config["live"]["response_url"])
+    print(live_config.live_config["live"])
     # exit(1)
     print("all download task has been completed")
