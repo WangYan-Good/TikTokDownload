@@ -62,6 +62,7 @@ from f2.apps.douyin.model import (
 
 from requests import request
 from requests import exceptions
+import urllib.request
 from random import randint
 from time import sleep
 
@@ -84,28 +85,38 @@ live_link = re.compile(r"\S*?https://live\.douyin\.com/([0-9]+)\S*?")  # 直播�
 live_link_self = re.compile(r"\S*?https://www\.douyin\.com/follow\?webRid=(\d+)\S*?")
 live_link_share = re.compile(r"\S*?https://webcast\.amemv\.com/douyin/webcast/reflow/\S+")
 
+Phone_headers = {
+    'User-Agent': 'com.ss.android.ugc.trill/494+Mozilla/5.0+(Linux;+Android+12;+2112123G+Build/SKQ1.211006.001;+wv)'
+                    '+AppleWebKit/537.36+(KHTML,+like+Gecko)+Version/4.0+Chrome/107.0.5304.105+Mobile+Safari/537.36'}
+
 def request_file (
     method: str,
     url: str,
+    nickname: str,
+    # params,
     stream: bool,
     proxies,
     headers: dict = None,
     timeout = 10,
     ):
     try:
+        print("\n name:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n".format(nickname, method, url, stream, proxies, headers, timeout))
+        urllib.request.urlretrieve(url, "/home/userid/Videos/" + nickname +".flv")
+        '''
         with request(method=method, url=url, stream=stream, proxies=proxies, headers=headers, timeout=timeout) as response:
-            print(response)
-            if not (content := int(response.headers.get('content-length',  0))) and True:
-                print("{url} 响应内容为空".format(url=res_js["data"]["room"]["stream_url"]["flv_pull_url"]["FULL_HD1"]))
+            # print(response)
+            if not (content := int(response.headers.get('content-length',  0))) and not False:
+                print("{u} 响应内容为空".format(u=url))
                 exit(1)
             if response.status_code != 200:
-                print("{url} 响应码异常: {status_code}".format(res_js["data"]["room"]["stream_url"]["flv_pull_url"]["FULL_HD1"], response.status_code))
+                print("{u} 响应码异常: {status_code}".format(url, response.status_code))
                 exit(1)
             elif all((104857600, content, content > 104857600)):
-                print("{show} 文件大小超出限制，跳过下载")
+                print("文件大小超出限制，跳过下载")
                 exit(1)
-            print(response.json())
+            print(response)
             exit(1)
+        download()
                     # download_file
                         # temp,
                         # actual,
@@ -115,9 +126,44 @@ def request_file (
                         # content,
                         # count,
                         # progress
+        '''
     except Exception as e:
         print("request error: {err}".format(err=e))
         exit(1)
+
+def download():
+    pass
+'''
+def download_file(
+        self,
+        temp: str,   # temp path
+        actual: str, # actual path
+        show: str,
+        id_: str,     # id
+        response,
+        content: int,
+        count: SimpleNamespace,
+        progress: Progress) -> bool:
+    task_id = progress.add_task(
+        show, total=content or None)
+    try:
+        with temp.open("wb") as f:
+            for chunk in response.iter_content(chunk_size=self.chunk):
+                f.write(chunk)
+                progress.update(task_id, advance=len(chunk))
+            progress.remove_task(task_id) 
+    except exceptions.ChunkedEncodingError:
+        progress.remove_task(task_id)
+        self.log.warning(f"{show} 由于网络异常下载中断")
+        self.delete_file(temp)
+        return False
+    self.save_file(temp, actual)
+    self.log.info(f"{show} 文件下载成功")
+    self.log.info(f"文件路径 {actual.resolve()}", False)
+    self.blacklist.update_id(id_)
+    self.add_count(show, id_, count)
+    return True
+'''
 
 if __name__ == "__main__":
     kwargs = dict()
@@ -145,9 +191,12 @@ if __name__ == "__main__":
     # print(kwargs)
 
     live_list = cf.getConfigList("live")
+    live_list.append("https://v.douyin.com/i2mmYRQp/")
+    print("live list: {}".format(live_list))
 
     for live_share_url in live_list:
         one_url = live_share_url # "https://v.douyin.com/iF32SFoa/" # live_share_url
+        # one_url = "https://v.douyin.com/i2mmYRQp/"
         try:            
             live_config = Live(one_url)
         except (
@@ -177,6 +226,7 @@ if __name__ == "__main__":
         live_config.update_config()
 
         try:
+            # print("\n method:{}\n url:{}\n params:{}\n timeout:{}\n headers:{}\n".format("get", download_params["live_api_share"], live_config.live_config["params"], 10, live_config.live_config["live"]["PC_headers"]))
             response = request(
                 method="get",
                 url=download_params["live_api_share"],
@@ -199,7 +249,8 @@ if __name__ == "__main__":
         try:
             # 获取直播推流
             res_js = response.json()
-            print(type(res_js))
+            # print(type(res_js))
+            print("\n")
             live = UserLive2Filter(res_js)
             print("主播昵称: {0} 开播时间: {1} 直播流清晰度: {2}".format(live.nickname, live.create_time, "、".join([f"{key}: {value}" for key, value in live.resolution_name.items()]),))
             print("直播ID: {0} 直播标题: {1} 直播状态: {2} 观看人数: {3}".format(live.web_rid, live.live_title, live.live_status, live.user_count))
@@ -215,7 +266,7 @@ if __name__ == "__main__":
             # 加入 user db
 
             # 创建下载任务
-            task = ("get", res_js["data"]["room"]["stream_url"]["flv_pull_url"]["FULL_HD1"], True, f2_proxies, live_config.live_config["live"]["PC_headers"], 10)
+            task = ("get", res_js["data"]["room"]["stream_url"]["flv_pull_url"]["FULL_HD1"], live.nickname, True, f2_proxies, live_config.live_config["live"]["PC_headers"], 0)
             download_task = threading.Thread(target=request_file, args=task)
             download_task.start()
 

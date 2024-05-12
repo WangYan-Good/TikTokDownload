@@ -38,23 +38,23 @@ live:
     User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
       like Gecko) Chrome/104.0.0.0 Safari/537.36
   hls_pull_url_map: null
-  live_link_share: https://v.douyin.com/iYsgDpLB/
+  live_link_share: https://v.douyin.com/i2mmYRQp/
   nickname: null
   response_url:
     netloc: webcast.amemv.com
     params: ''
-    path: /douyin/webcast/reflow/7359941191225363219
+    path: /douyin/webcast/reflow/7367950269759425315
     query:
       app:
       - aweme
       did:
       - MS4wLjABAAAAT0W1apCqYj7QR0wSGWlbDgYEAwgMVFjr3fakADqRoTI
       extra_params:
-      - '{"im_channel_invite_id":"","shop_guide_id":"","enable_replay":1,"live_common_share_params":"{"bcm":"{"bcm_share_id":"7359942350745075987"}"}","life_extra_info":"{"live_play_id":"","live_play_share_id":"","live_share_coupon_id":""}","from_request_id":"202404202134467D46DCB0938EA0191E5C","share_platform":"copy","vs_episode_sub_type":"unknown","vs_episode_id":0}'
+      - '{"im_channel_invite_id":"","shop_guide_id":"","enable_replay":1,"live_common_share_params":"{"bcm":"{"bcm_share_id":"7367955876453302582"}"}","life_extra_info":"{"live_play_id":"","live_play_share_id":"","live_share_coupon_id":""}","from_request_id":"20240512115125836B0025A8FE88DFB59C","share_platform":"copy","vs_episode_sub_type":"unknown","vs_episode_id":0}'
       iid:
-      - MS4wLjABAAAAcWSLMLsUzvgBQmsged4bkRl959zabKPHHwmWj_dZj5c
+      - MS4wLjABAAAAJGY0KY4y8S7oDK8cvBmWt-i7UZTYtxsz5RMRC6ZPkSCAsdTGZRwF_Bg-U7VFNT-C
       sec_user_id: &id002
-      - MS4wLjABAAAAHk13avLp_bT5mqBNDCE5gRQ9OKuywrMSC8YXQsEMOyA
+      - MS4wLjABAAAAbqB34lrj8vph6MA37NhxP-io6VGvx8domVL3e9ybyqfJ5IAv38q1o3LAsA6_GB8x
       share_extra_params:
       - '{"enable_replay":1}'
       tt_from:
@@ -72,7 +72,7 @@ live:
     scheme: https
   rid: true
   room_id: &id001
-  - '7359941191225363219'
+  - '7367950269759425315'
   status: null
   title: null
   total_user_str: null
@@ -80,17 +80,17 @@ live:
   web_rid: null
 params:
   X-Bogus:
-  - https://webcast.amemv.com/douyin/webcast/reflow/7359941191225363219?iid=MS4wLjABAAAAcWSLMLsUzvgBQmsged4bkRl959zabKPHHwmWj_dZj5c&utm_source=copy&tt_from=copy&extra_params=%7B%22im_channel_invite_id%22:%22%22,%22shop_guide_id%22:%22%22,%22enable_replay%22:1,%22live_common_share_params%22:%22%7B%5C%22bcm%5C%22:%5C%22%7B%5C%5C%5C%22bcm_share_id%5C%5C%5C%22:%5C%5C%5C%227359942350745075987%5C%5C%5C%22%7D%5C%22%7D%22,%22life_extra_info%22:%22%7B%5C%22live_play_id%5C%22:%5C%22%5C%22,%5C%22live_play_share_id%5C%22:%5C%22%5C%22,%5C%22live_share_coupon_id%5C%22:%5C%22%5C%22%7D%22,%22from_request_id%22:%22202404202134467D46DCB0938EA0191E5C%22,%22share_platform%22:%22copy%22,%22vs_episode_sub_type%22:%22unknown%22,%22vs_episode_id%22:0%7D&utm_medium=ios&with_sec_did=1&sec_user_id=MS4wLjABAAAAHk13avLp_bT5mqBNDCE5gRQ9OKuywrMSC8YXQsEMOyA&utm_campaign=client_share&u_code=ki64k3a1&app=aweme&did=MS4wLjABAAAAT0W1apCqYj7QR0wSGWlbDgYEAwgMVFjr3fakADqRoTI&share_extra_params=%7B%22enable_replay%22:1%7D&X-Bogus=DFSzswVYyG2ANHT3tl3t5F9WX7rm
-  - DFSzswVYyG2ANHT3tl3t5F9WX7rm
+  - https://webcast.amemv.com/douyin/webcast/reflow/7367950269759425315?iid=MS4wLjABAAAAJGY0KY4y8S7oDK8cvBmWt-i7UZTYtxsz5RMRC6ZPkSCAsdTGZRwF_Bg-U7VFNT-C&utm_source=copy&tt_from=copy&extra_params=%7B%22im_channel_invite_id%22:%22%22,%22shop_guide_id%22:%22%22,%22enable_replay%22:1,%22live_common_share_params%22:%22%7B%5C%22bcm%5C%22:%5C%22%7B%5C%5C%5C%22bcm_share_id%5C%5C%5C%22:%5C%5C%5C%227367955876453302582%5C%5C%5C%22%7D%5C%22%7D%22,%22life_extra_info%22:%22%7B%5C%22live_play_id%5C%22:%5C%22%5C%22,%5C%22live_play_share_id%5C%22:%5C%22%5C%22,%5C%22live_share_coupon_id%5C%22:%5C%22%5C%22%7D%22,%22from_request_id%22:%2220240512115125836B0025A8FE88DFB59C%22,%22share_platform%22:%22copy%22,%22vs_episode_sub_type%22:%22unknown%22,%22vs_episode_id%22:0%7D&utm_medium=ios&with_sec_did=1&sec_user_id=MS4wLjABAAAAbqB34lrj8vph6MA37NhxP-io6VGvx8domVL3e9ybyqfJ5IAv38q1o3LAsA6_GB8x&utm_campaign=client_share&u_code=ki64k3a1&app=aweme&did=MS4wLjABAAAAT0W1apCqYj7QR0wSGWlbDgYEAwgMVFjr3fakADqRoTI&share_extra_params=%7B%22enable_replay%22:1%7D&X-Bogus=DFSzswVYMLvANHT3tlfG6M9WX7jF
+  - DFSzswVYMLvANHT3tlfG6M9WX7jF
   - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
     Chrome/104.0.0.0 Safari/537.36
   app_id: '1128'
   live_api: https://live.douyin.com/webcast/room/web/enter/
   live_api_share: https://webcast.amemv.com/webcast/room/reflow/info/
   live_id: '1'
-  msToken: Gb5eXR9uT66_OjQTdyUUVuFaWfNhEkT32NiBOOvixVffDDatOxddltly09OgHBpHnJzjwcYwro8_yvSx9a5-JckKz3wfBh2fbGIQYzQwNYvRImafBW8Evi0TBvDAFw==
+  msToken: Cmpcy8TngVEczStIp3mIGX0oqvhU8eyTuwS9mzoldAiA6hkt9HdfZQNBDyYu6piKmCvbuXVCoLRMB9kM0zqB-BkUaLmuCfhXkW1p-P5yw6Eyx9jHLeQQb2Td5UrVJg==
   room_id: *id001
   sec_user_id: *id002
   type_id: '0'
-  verifyFp: verify_lw2zfq5l_xyo7gmkx_2HpV_4QAn_9WTg_ptAelPfSizCp
+  verifyFp: verify_lw3tcext_SFmOwm2N_MYvv_4zzq_BeqR_urAPFiUHJkZT
   version_code: 99.99.99
