@@ -63,6 +63,7 @@ from f2.apps.douyin.model import (
 from requests import request
 from requests import exceptions
 import urllib.request
+from urllib.error import ContentTooShortError 
 from random import randint
 from time import sleep
 
@@ -89,6 +90,17 @@ Phone_headers = {
     'User-Agent': 'com.ss.android.ugc.trill/494+Mozilla/5.0+(Linux;+Android+12;+2112123G+Build/SKQ1.211006.001;+wv)'
                     '+AppleWebKit/537.36+(KHTML,+like+Gecko)+Version/4.0+Chrome/107.0.5304.105+Mobile+Safari/537.36'}
 
+def auto_down (url: str, fp: str, retry_times: int):
+    try:
+        if retry_times != 0:
+            file_name = fp + "_" + retry_times + ".flv"
+        else:
+            file_name = fp
+        urllib.request.urlretrieve (url, file_name)
+    except ContentTooShortError:
+        retry_times += 1
+        auto_down (url, fp, retry_times)
+
 def request_file (
     method: str,
     url: str,
@@ -100,8 +112,10 @@ def request_file (
     timeout = 10,
     ):
     try:
-        print("\n name:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n".format(nickname, method, url, stream, proxies, headers, timeout))
-        urllib.request.urlretrieve(url, "/home/userid/Videos/" + nickname +".flv")
+        print("\n name:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n start download:".format(nickname, method, url, stream, proxies, headers, timeout))
+        # urllib.request.urlretrieve(url, "/home/userid/Videos/" + nickname +".flv")
+        auto_down (url, "/home/userid/Videos/" + nickname, 0)
+        print("\n name:{}\n url:{}\n download complete!\n".format(nickname, url))
         '''
         with request(method=method, url=url, stream=stream, proxies=proxies, headers=headers, timeout=timeout) as response:
             # print(response)
@@ -127,6 +141,7 @@ def request_file (
                         # count,
                         # progress
         '''
+    
     except Exception as e:
         print("request error: {err}".format(err=e))
         exit(1)
@@ -222,7 +237,7 @@ if __name__ == "__main__":
         download_params["live_api_share"] = "https://webcast.amemv.com/webcast/room/reflow/info/"
 
         live_config.live_config["params"] = download_params
-        live_config.update_config()
+        # live_config.update_config()
 
         try:
             # print("\n method:{}\n url:{}\n params:{}\n timeout:{}\n headers:{}\n".format("get", download_params["live_api_share"], live_config.live_config["params"], 10, live_config.live_config["live"]["PC_headers"]))

@@ -3,8 +3,8 @@ data:
     AnchorABMap: {}
     acquaintance_status: 0
     admin_user_ids:
-    - 979009706656713
     - 2966962168136361
+    - 979009706656713
     anchor_scheduled_time_text: ''
     anchor_share_text: "#\u5728\u6296\u97F3\uFF0C\u8BB0\u5F55\u7F8E\u597D\u751F\u6D3B\
       #\u3010\u679C\u679C\U0001F353\u3011\u6B63\u5728\u76F4\u64AD\uFF0C\u6765\u548C\
@@ -24,14 +24,14 @@ data:
     cell_style: 3
     challenge_info: ''
     city_top_distance: ''
-    client_version: 290800
+    client_version: 290200
     comment_box:
       placeholder: "\u8BF4\u70B9\u4EC0\u4E48..."
     comment_name_mode: 0
     common_label_list: ''
     content_tag: ''
     cover:
-      avg_color: '#CECEEB'
+      avg_color: '#FAF0DC'
       flex_setting_list: []
       height: 0
       image_type: 0
@@ -40,48 +40,48 @@ data:
       text_setting_list: []
       uri: webcast-cover/7313963980144478985
       url_list:
-      - http://p9-webcast-sign.douyinpic.com/webcast-cover/7313963980144478985~tplv-qz53dukwul-common-resize:0:0.image?biz_tag=aweme_webcast&from=webcast.room.pack&l=2024051301303425C2858D87B35A317B7B&lk3s=39e7556e&s=reflow_room_info&sc=webcast_cover&x-expires=1718127034&x-signature=fSueCQfFqvIRJgzp7u%2BUWCvWynQ%3D
-      - http://p3-webcast-sign.douyinpic.com/webcast-cover/7313963980144478985~tplv-qz53dukwul-common-resize:0:0.image?biz_tag=aweme_webcast&from=webcast.room.pack&l=2024051301303425C2858D87B35A317B7B&lk3s=39e7556e&s=reflow_room_info&sc=webcast_cover&x-expires=1718127034&x-signature=6AoTxwJAOPQC1T%2FH%2FUTQifC3bqw%3D
+      - http://p3-webcast-sign.douyinpic.com/webcast-cover/7313963980144478985~tplv-qz53dukwul-common-resize:0:0.image?biz_tag=aweme_webcast&from=webcast.room.pack&l=20240513181743895A4FC1125B170DA313&lk3s=39e7556e&s=reflow_room_info&sc=webcast_cover&x-expires=1718187463&x-signature=7qoE%2FhZH9vIX%2BnWlyxcnFM%2BmZ%2BE%3D
+      - http://p9-webcast-sign.douyinpic.com/webcast-cover/7313963980144478985~tplv-qz53dukwul-common-resize:0:0.image?biz_tag=aweme_webcast&from=webcast.room.pack&l=20240513181743895A4FC1125B170DA313&lk3s=39e7556e&s=reflow_room_info&sc=webcast_cover&x-expires=1718187463&x-signature=4ZnYt1gtpyoB1NIuW2nO1n7bTfA%3D
       width: 0
-    create_time: 1715531209
+    create_time: 1712412214
     danmaku_detail: 0
     deco_list:
     - audit_text_color: ''
-      content: "\u5FC3\u613F\u5355"
+      content: "\u516C\u5B50\u8BF7\u2795\u4F1A\u5458"
       h: 2796
-      id: 1200
+      id: 1187
       image:
-        avg_color: '#523737'
+        avg_color: '#E0BCBC'
         flex_setting_list: []
         height: 0
         image_type: 0
         is_animated: false
         open_web_url: ''
         text_setting_list: []
-        uri: webcast/decoration_8cc34624b03fdf99f988119304436c19.png
+        uri: webcast/decoration_13e86f8bfb4c405e3d59fb75b80851ad.png
         url_list:
-        - http://p11-webcast.douyinpic.com/img/webcast/decoration_8cc34624b03fdf99f988119304436c19.png~tplv-resize:0:0.image
-        - http://p3-webcast.douyinpic.com/img/webcast/decoration_8cc34624b03fdf99f988119304436c19.png~tplv-resize:0:0.image
+        - http://p3-webcast.douyinpic.com/img/webcast/decoration_13e86f8bfb4c405e3d59fb75b80851ad.png~tplv-resize:0:0.image
+        - http://p11-webcast.douyinpic.com/img/webcast/decoration_13e86f8bfb4c405e3d59fb75b80851ad.png~tplv-resize:0:0.image
         width: 0
       input_rect:
-      - 99
+      - 63
       - 43
       - 195
       - 34
       kind: 0
       max_length: 8
       nine_patch_image:
-        avg_color: '#374C52'
+        avg_color: '#FADCF0'
         flex_setting_list: []
         height: 0
         image_type: 0
         is_animated: false
         open_web_url: ''
         text_setting_list: []
-        uri: webcast/decoration_12e82a056e35dc114eae043d50672f4c.png
+        uri: webcast/decoration_3e4ff163c79351791eb5c029a49bbc49.png
         url_list:
-        - http://p3-webcast.douyinpic.com/img/webcast/decoration_12e82a056e35dc114eae043d50672f4c.png~tplv-obj.image
-        - http://p11-webcast.douyinpic.com/img/webcast/decoration_12e82a056e35dc114eae043d50672f4c.png~tplv-obj.image
+        - http://p3-webcast.douyinpic.com/img/webcast/decoration_3e4ff163c79351791eb5c029a49bbc49.png~tplv-obj.image
+        - http://p11-webcast.douyinpic.com/img/webcast/decoration_3e4ff163c79351791eb5c029a49bbc49.png~tplv-obj.image
         width: 0
       reservation:
         anchor_id: 0
@@ -97,12 +97,12 @@ data:
       text_color: '#FFFFFF'
       text_image_adjustable_end_position: 212
       text_image_adjustable_start_position: 132
-      text_size: 24
+      text_size: 25
       text_special_effects: []
       type: 1
       w: 1290
-      x: 1011
-      y: 732
+      x: 1047
+      y: 555
     distance: ''
     distance_city: ''
     distance_km: ''
@@ -126,7 +126,7 @@ data:
     fansclub_msg_style: 0
     fcdn_appid: 0
     feed_room_label:
-      avg_color: '#53537A'
+      avg_color: '#FAF0DC'
       content:
         alternative_text: ''
         font_color: ''
@@ -140,12 +140,12 @@ data:
       text_setting_list: []
       uri: webcast/2ea90002aca1159b5c67
       url_list:
-      - http://p3-webcast.douyinpic.com/img/webcast/2ea90002aca1159b5c67~tplv-resize:0:0.image
       - http://p11-webcast.douyinpic.com/img/webcast/2ea90002aca1159b5c67~tplv-resize:0:0.image
+      - http://p3-webcast.douyinpic.com/img/webcast/2ea90002aca1159b5c67~tplv-resize:0:0.image
       width: 0
     filter_words: []
-    finish_reason: 0
-    finish_time: 1715535023
+    finish_reason: 1
+    finish_time: 1712434271
     finish_url: ''
     follow_msg_style: 0
     forum_extra_data: ''
@@ -154,24 +154,24 @@ data:
     group_id: 0
     group_source: 0
     guide_button:
-      avg_color: '#7C9BA3'
+      avg_color: '#FAFAFA'
       flex_setting_list: []
       height: 0
       image_type: 0
       is_animated: false
       open_web_url: ''
       text_setting_list: []
-      uri: webcast/aweme_button_togather_3x.png
+      uri: webcast/aweme_button_call_3x.png
       url_list:
-      - http://p3-webcast.douyinpic.com/img/webcast/aweme_button_togather_3x.png~tplv-resize:0:0.image
-      - http://p11-webcast.douyinpic.com/img/webcast/aweme_button_togather_3x.png~tplv-resize:0:0.image
+      - http://p3-webcast.douyinpic.com/img/webcast/aweme_button_call_3x.png~tplv-resize:0:0.image
+      - http://p11-webcast.douyinpic.com/img/webcast/aweme_button_call_3x.png~tplv-resize:0:0.image
       width: 0
     has_commerce_goods: false
     has_promotion_games: 0
     highlight: false
     hot_sentence_info: ''
-    id: 7368150093209389839
-    id_str: '7368150093209389839'
+    id: 7354754312020806454
+    id_str: '7354754312020806454'
     introduction: ''
     is_need_check_list: false
     is_official_channel_room: false
@@ -179,9 +179,9 @@ data:
     is_show_inquiry_ball: false
     is_show_user_card_switch: true
     item_explicit_info: ''
-    last_ping_time: 1715535023
+    last_ping_time: 0
     layout: 0
-    like_count: 2103
+    like_count: 14688
     linker_map: {}
     linkmic_display_type: 0
     linkmic_layout: 1
@@ -201,8 +201,8 @@ data:
     living_room_attrs:
       admin_flag: 0
       rank: 0
-      room_id: 7368150093209389839
-      room_id_str: '7368150093209389839'
+      room_id: 7354754312020806454
+      room_id_str: '7354754312020806454'
       silence_flag: 0
     location: ''
     lottery_finish_time: 0
@@ -237,9 +237,9 @@ data:
         text_setting_list: []
         uri: 1080x1080/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171
         url_list:
+        - https://p3.douyinpic.com/aweme/1080x1080/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         - https://p11.douyinpic.com/aweme/1080x1080/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         - https://p26.douyinpic.com/aweme/1080x1080/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
-        - https://p3.douyinpic.com/aweme/1080x1080/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         width: 0
       avatar_medium:
         avg_color: ''
@@ -251,9 +251,9 @@ data:
         text_setting_list: []
         uri: 720x720/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171
         url_list:
+        - https://p3.douyinpic.com/aweme/720x720/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         - https://p26.douyinpic.com/aweme/720x720/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         - https://p11.douyinpic.com/aweme/720x720/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
-        - https://p3.douyinpic.com/aweme/720x720/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         width: 0
       avatar_thumb:
         avg_color: ''
@@ -265,9 +265,9 @@ data:
         text_setting_list: []
         uri: 100x100/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171
         url_list:
-        - https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         - https://p3.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         - https://p26.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
+        - https://p11.douyinpic.com/aweme/100x100/aweme-avatar/tos-cn-avt-0015_009b69d27cf04c3786038ae8eb09f171.jpeg?from=3067671334
         width: 0
       badge_image_list: []
       badge_image_list_v2: []
@@ -317,8 +317,8 @@ data:
       fold_stranger_chat: false
       follow_info:
         follow_status: 0
-        follower_count: 27201
-        follower_count_str: "2.7\u4E07"
+        follower_count: 27612
+        follower_count_str: "2.8\u4E07"
         following_count: 21
         following_count_str: '21'
         invalid_follow_status: false
@@ -349,12 +349,6 @@ data:
       need_profile_guide: false
       new_real_time_icons: []
       nickname: "\u679C\u679C\U0001F353"
-      own_room:
-        room_ids:
-        - 7368150093209389839
-        room_ids_display: []
-        room_ids_str:
-        - '7368150093209389839'
       pay_grade:
         grade_banner: ''
         grade_describe: ''
@@ -419,7 +413,7 @@ data:
       verified_reason: ''
       watch_duration_month: 0
       web_rid: '863695703869'
-      webcast_uid: MS4wLjMiatbnAF82iURvxWrrVxse6L7Rfn_gMlWLUSZYFxG47ZWuYJ5X4OHmfGPhLC3p24o
+      webcast_uid: MS4wLjNzL77BZ4H9Go4Nc-KsN8nPgX-cafakiBKVKJbxiOtHVb-4LeS4mKyWRWeYQckcuc0
       with_car_management_permission: false
       with_commerce_permission: false
       with_fusion_shop_entry: false
@@ -446,8 +440,8 @@ data:
     popularity: 0
     popularity_str: ''
     pre_enter_time: 0
-    preview_copy: "\u6211\u4EEC\u4E4B\u95F4\u7684\u8DDD\u79BB\u597D\u50CF\u5FFD\u8FDC\
-      \u53C8\u5FFD\u8FD1"
+    preview_copy: "\u4E16\u754C\u5F88\u5927\uFF0C\u4F46\u6211\u4EEC\u5F88\u6709\u7F18\
+      ~"
     preview_flow_tag: 0
     private_info: ''
     ranklist_audience_type: 0
@@ -604,23 +598,23 @@ data:
     room_tabs: []
     room_tag: 0
     room_view_stats:
-      display_long: "7816\u4EBA\u770B\u8FC7"
-      display_long_anchor: "7816\u4EBA\u770B\u8FC7"
-      display_middle: "7816\u4EBA\u770B\u8FC7"
-      display_middle_anchor: "7816\u4EBA\u770B\u8FC7"
-      display_short: '7816'
-      display_short_anchor: '7816'
+      display_long: "3.6\u4E07\u4EBA\u770B\u8FC7"
+      display_long_anchor: "3.6\u4E07\u4EBA\u770B\u8FC7"
+      display_middle: "3.6\u4E07\u4EBA\u770B\u8FC7"
+      display_middle_anchor: "3.6\u4E07\u4EBA\u770B\u8FC7"
+      display_short: "3.6\u4E07"
+      display_short_anchor: "3.6\u4E07"
       display_type: 3
-      display_value: 7816
+      display_value: 35670
       display_version: 1663849727
       incremental: true
       is_hidden: false
     screen_capture_sharing_title: ''
     scroll_config: ''
-    search_id: 7368150170929728783
+    search_id: 7354754308350545206
     sell_goods: false
     share_msg_style: 0
-    share_url: https://webcast.amemv.com/douyin/webcast/reflow/7368150093209389839?did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ&iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ&with_sec_did=1&sec_user_id=MS4wLjABAAAAzNDA7X531W4psXKDze6euKq21Eg6vQK0stldV7VVkEc
+    share_url: https://webcast.amemv.com/douyin/webcast/reflow/7354754312020806454?did=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ&iid=MS4wLjABAAAANwkJuWIRFOzg5uCpDRpMj4OX-QryoDgn-yYlXQnRwQQ&with_sec_did=1&sec_user_id=MS4wLjABAAAAzNDA7X531W4psXKDze6euKq21Eg6vQK0stldV7VVkEc
     sharing_music_id_list: []
     short_title: ''
     short_touch_area_config:
@@ -904,22 +898,22 @@ data:
                 strategy_type: 3
     sofa_layout: 0
     stamps: ''
-    start_time: 1715531213
+    start_time: 1712412218
     stats:
       comment_count: 0
       digg_count: 0
       dou_plus_promotion: ''
       enter_count: 0
       fan_ticket: 0
-      follow_count: 62
+      follow_count: 406
       gift_uv_count: 0
-      id: 7368150093209389839
-      id_str: '7368150093209389839'
+      id: 7354754312020806454
+      id_str: '7354754312020806454'
       like_count: 0
       money: 0
-      total_user: 6189
+      total_user: 24838
       total_user_desp: ''
-      total_user_str: '6189'
+      total_user_str: "2\u4E07+"
       up_right_stats_str: ''
       up_right_stats_str_complete: ''
       user_count_composition:
@@ -927,13 +921,13 @@ data:
         my_follow: 0
         other: 1
         video_detail: 0
-      user_count_str: '40'
+      user_count_str: '0'
       watermelon: 0
       welfare_donation_amount: 0
-    status: 2
+    status: 4
     stream_close_time: 0
-    stream_id: 691588102361448530
-    stream_id_str: '691588102361448530'
+    stream_id: 403148414198480927
+    stream_id_str: '403148414198480927'
     stream_provider: 0
     stream_url:
       candidate_resolution:
@@ -961,23 +955,23 @@ data:
         video_profile: 0
         width: 1088
       flv_pull_url:
-        FULL_HD1: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_or4.flv?auth_key=1716138034-0-0-549e912ae72b7418bbfa1d4e01716771
-        HD1: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_hd.flv?auth_key=1716138034-0-0-e36157c8f933f5f03b7a187994a9f617
-        SD1: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_ld.flv?auth_key=1716138034-0-0-f4831347fbfb8e4cea3a6472b6007404
-        SD2: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_sd.flv?auth_key=1716138034-0-0-f5d7625aa6962628711fb4c0f05fe6f8
+        FULL_HD1: http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_or4.flv?k=96e8519599b43bf7&t=1716200263
+        HD1: http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_hd.flv?k=3615e910de605aaa&t=1716200263
+        SD1: http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_ld.flv?k=c364261a69a0a58d&t=1716200263
+        SD2: http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_sd.flv?k=b781a267de429382&t=1716200263
       flv_pull_url_params:
-        HD1: '{"FastOpenDuration":-500,"NetworkAdapt":{"SlowSpeed":1,"HurryStartMs":4000,"HurryStopType":1,"SlowMillisecond":90,"SlowTime":90,"Enabled":0,"HurrySpeed":1.1,"HurryTime":3500,"HurryType":0,"HurryMillisecond":3500},"PlayingIntervalMs":20000,"P2PFastOpenDuration":-1500,"BufferDataMs":1000,"VCodec":"h264"}'
-        SD1: '{"BufferDataMs":1000,"FastOpenDuration":-500,"NetworkAdapt":{"Enabled":0,"HurrySpeed":1.1,"HurryStopType":1,"HurryType":0,"SlowMillisecond":90,"HurryMillisecond":3500,"SlowTime":90,"SlowSpeed":1,"HurryStartMs":4000,"HurryTime":3500},"PlayingIntervalMs":20000,"P2PFastOpenDuration":-1500,"VCodec":"h264"}'
-        SD2: '{"FastOpenDuration":-500,"NetworkAdapt":{"SlowSpeed":1,"HurryStopType":1,"HurryTime":3500,"HurryType":0,"HurryMillisecond":3500,"Enabled":0,"HurrySpeed":1.1,"HurryStartMs":4000,"SlowMillisecond":90,"SlowTime":90},"PlayingIntervalMs":20000,"P2PFastOpenDuration":-1500,"BufferDataMs":1000,"VCodec":"h264"}'
-      hls_pull_url: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_or4.m3u8?auth_key=1716138034-0-0-0b6787d326cd85eade615fba07075061
+        HD1: '{"VCodec":"h264","P2PFastOpenDuration":-1500,"BufferDataMs":1000,"FastOpenDuration":-500,"NetworkAdapt":{"HurryStopType":1,"HurryTime":3500,"SlowSpeed":1,"HurryStartMs":4000,"SlowTime":90,"HurryMillisecond":3500,"Enabled":0,"HurrySpeed":1.1,"HurryType":0,"SlowMillisecond":90},"PlayingIntervalMs":20000}'
+        SD1: '{"VCodec":"h264","P2PFastOpenDuration":-1500,"BufferDataMs":1000,"FastOpenDuration":-500,"NetworkAdapt":{"HurrySpeed":1.1,"HurryStopType":1,"HurryTime":3500,"SlowTime":90,"HurryStartMs":4000,"HurryMillisecond":3500,"Enabled":0,"HurryType":0,"SlowMillisecond":90,"SlowSpeed":1},"PlayingIntervalMs":20000}'
+        SD2: '{"P2PFastOpenDuration":-1500,"BufferDataMs":1000,"FastOpenDuration":-500,"NetworkAdapt":{"HurrySpeed":1.1,"HurryStartMs":4000,"SlowMillisecond":90,"HurryStopType":1,"HurryTime":3500,"SlowSpeed":1,"HurryType":0,"Enabled":0,"HurryMillisecond":3500,"SlowTime":90},"PlayingIntervalMs":20000,"VCodec":"h264"}'
+      hls_pull_url: http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_or4/index.m3u8?k=ba74aca1ba868d50&t=1716200263
       hls_pull_url_map:
-        FULL_HD1: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_or4.m3u8?auth_key=1716138034-0-0-0b6787d326cd85eade615fba07075061
-        HD1: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_hd.m3u8?auth_key=1716138034-0-0-3786536f1afec2901aa3f457103edf99
-        SD1: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_ld.m3u8?auth_key=1716138034-0-0-d006e0dc00c952c3d1147c0f94c53700
-        SD2: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_sd.m3u8?auth_key=1716138034-0-0-1181a2befe849389d912c2a95c6a32c4
-      hls_pull_url_params: '{"PlayingIntervalMs":20000,"P2PFastOpenDuration":-1500,"BufferDataMs":1000,"VCodec":"h264","FastOpenDuration":-500,"NetworkAdapt":{"HurryStopType":1,"HurryTime":3500,"SlowMillisecond":90,"Enabled":0,"SlowTime":90,"HurrySpeed":1.1,"SlowSpeed":1,"HurryMillisecond":3500,"HurryType":0,"HurryStartMs":4000}}'
-      id: 691588102361448530
-      id_str: '691588102361448530'
+        FULL_HD1: http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_or4/index.m3u8?k=ba74aca1ba868d50&t=1716200263
+        HD1: http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_hd/index.m3u8?k=b6cb2a9d0399385a&t=1716200263
+        SD1: http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_ld/index.m3u8?k=d7db0afc7d04d0ab&t=1716200263
+        SD2: http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_sd/index.m3u8?k=0f8db5603ed2af70&t=1716200263
+      hls_pull_url_params: '{"FastOpenDuration":-500,"NetworkAdapt":{"HurryType":0,"SlowTime":90,"HurryStartMs":4000,"SlowMillisecond":90,"Enabled":0,"HurryMillisecond":3500,"SlowSpeed":1,"HurryStopType":1,"HurryTime":3500,"HurrySpeed":1.1},"PlayingIntervalMs":20000,"P2PFastOpenDuration":-1500,"BufferDataMs":1000,"VCodec":"h264"}'
+      id: 403148414198480927
+      id_str: '403148414198480927'
       live_core_sdk_data:
         pull_data:
           Flv: []
@@ -1032,10 +1026,10 @@ data:
               name: "\u84DD\u5149"
               resolution: 1088x1920
               sdk_key: origin
-              v_bit_rate: 3497000
+              v_bit_rate: 2015000
               v_codec: '264'
             vpass_default: false
-          stream_data: '{"common":{"session_id":"037-2024051301303425C2858D87B35A317B7B","stream":"691588102361448530","rule_ids":"{\"ab_version_trace\":null,\"sched\":\"{\\\"result\\\":{\\\"hit\\\":\\\"default\\\",\\\"cdn\\\":100}}\"}","common_trace":"{\"StrategyTrace\":{\"Neptune\":{\"PlayStream\":{\"ids\":null}}}}","app_id":"100100"},"data":{"ao":{"main":{"flv":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530.flv?auth_key=1716138034-0-0-05444e7f780fac078bf87d5bc2cfbede&only_audio=1","hls":"","cmaf":"","dash":"","lls":"","tsl":"","tile":"","sdk_params":"{\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"HurryStartMs\":4000,\"HurrySpeed\":1.1,\"HurryMillisecond\":3500,\"SlowMillisecond\":90,\"SlowTime\":90,\"Enabled\":0,\"SlowSpeed\":1,\"HurryStopType\":1,\"HurryTime\":3500,\"HurryType\":0},\"PlayingIntervalMs\":20000,\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"VCodec\":\"h264\",\"vbitrate\":0,\"resolution\":\"\",\"gop\":2,\"drType\":\"sdr\"}"}},"origin":{"main":{"flv":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_or4.flv?auth_key=1716138034-0-0-549e912ae72b7418bbfa1d4e01716771","hls":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_or4.m3u8?auth_key=1716138034-0-0-0b6787d326cd85eade615fba07075061","cmaf":"","dash":"","lls":"http://pull-lls-l3.douyincdn.com/stage/stream-691588102361448530_or4.sdp?auth_key=1716138034-0-0-ca6d687e878dcb4f23dd03a8882ffc10","tsl":"","tile":"","sdk_params":"{\"PlayingIntervalMs\":20000,\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"VCodec\":\"h264\",\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"HurryStopType\":1,\"HurryTime\":3500,\"SlowMillisecond\":90,\"Enabled\":0,\"SlowTime\":90,\"HurrySpeed\":1.1,\"SlowSpeed\":1,\"HurryMillisecond\":3500,\"HurryType\":0,\"HurryStartMs\":4000},\"vbitrate\":3497000,\"resolution\":\"1088x1920\",\"gop\":4,\"drType\":\"sdr\"}"}},"hd":{"main":{"flv":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_hd.flv?auth_key=1716138034-0-0-e36157c8f933f5f03b7a187994a9f617","hls":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_hd.m3u8?auth_key=1716138034-0-0-3786536f1afec2901aa3f457103edf99","cmaf":"","dash":"","lls":"http://pull-lls-l3.douyincdn.com/stage/stream-691588102361448530_hd.sdp?auth_key=1716138034-0-0-7995913a4787efe6bd39d05cfe237ddc","tsl":"","tile":"","sdk_params":"{\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"SlowSpeed\":1,\"HurryStartMs\":4000,\"HurryStopType\":1,\"SlowMillisecond\":90,\"SlowTime\":90,\"Enabled\":0,\"HurrySpeed\":1.1,\"HurryTime\":3500,\"HurryType\":0,\"HurryMillisecond\":3500},\"PlayingIntervalMs\":20000,\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"VCodec\":\"h264\",\"vbitrate\":2000000,\"resolution\":\"720x1270\",\"gop\":4,\"drType\":\"sdr\"}"}},"sd":{"main":{"flv":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_sd.flv?auth_key=1716138034-0-0-f5d7625aa6962628711fb4c0f05fe6f8","hls":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_sd.m3u8?auth_key=1716138034-0-0-1181a2befe849389d912c2a95c6a32c4","cmaf":"","dash":"","lls":"http://pull-lls-l3.douyincdn.com/stage/stream-691588102361448530_sd.sdp?auth_key=1716138034-0-0-9af8ec3960134a3f2be71e4b049faa0b","tsl":"","tile":"","sdk_params":"{\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"SlowSpeed\":1,\"HurryStopType\":1,\"HurryTime\":3500,\"HurryType\":0,\"HurryMillisecond\":3500,\"Enabled\":0,\"HurrySpeed\":1.1,\"HurryStartMs\":4000,\"SlowMillisecond\":90,\"SlowTime\":90},\"PlayingIntervalMs\":20000,\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"VCodec\":\"h264\",\"vbitrate\":1600000,\"resolution\":\"540x952\",\"gop\":4,\"drType\":\"sdr\"}"}},"ld":{"main":{"flv":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_ld.flv?auth_key=1716138034-0-0-f4831347fbfb8e4cea3a6472b6007404","hls":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_ld.m3u8?auth_key=1716138034-0-0-d006e0dc00c952c3d1147c0f94c53700","cmaf":"","dash":"","lls":"http://pull-lls-l3.douyincdn.com/stage/stream-691588102361448530_ld.sdp?auth_key=1716138034-0-0-7fe1be3c32c3518369e942ffa1c03744","tsl":"","tile":"","sdk_params":"{\"BufferDataMs\":1000,\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"Enabled\":0,\"HurrySpeed\":1.1,\"HurryStopType\":1,\"HurryType\":0,\"SlowMillisecond\":90,\"HurryMillisecond\":3500,\"SlowTime\":90,\"SlowSpeed\":1,\"HurryStartMs\":4000,\"HurryTime\":3500},\"PlayingIntervalMs\":20000,\"P2PFastOpenDuration\":-1500,\"VCodec\":\"h264\",\"vbitrate\":1000000,\"resolution\":\"480x847\",\"gop\":4,\"drType\":\"sdr\"}"}},"md":{"main":{"flv":"https://pull-l3-admin.douyincdn.com/stage/stream-691588102361448530_md.flv?auth_key=1716138034-0-0-c9b08bad23642a40e9ce193830e2388c","hls":"http://pull-l3.douyincdn.com/stage/stream-691588102361448530_md.m3u8?auth_key=1716138034-0-0-911c0706eb2611300378a17b726fdf03","cmaf":"","dash":"","lls":"http://pull-lls-l3.douyincdn.com/stage/stream-691588102361448530_md.sdp?auth_key=1716138034-0-0-48768517f0264f0ae5e57a59ed73215c","tsl":"","tile":"","sdk_params":"{\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"SlowMillisecond\":90,\"HurryStartMs\":4000,\"SlowTime\":90,\"Enabled\":0,\"HurryType\":0,\"HurryTime\":3500,\"HurrySpeed\":1.1,\"SlowSpeed\":1,\"HurryMillisecond\":3500,\"HurryStopType\":1},\"PlayingIntervalMs\":20000,\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"VCodec\":\"h264\",\"vbitrate\":250000,\"resolution\":\"240x423\",\"gop\":4,\"drType\":\"sdr\"}"}}}}'
+          stream_data: '{"common":{"session_id":"037-20240513181743895A4FC1125B170DA313","stream":"403148414198480927","rule_ids":"{\"ab_version_trace\":null,\"sched\":\"{\\\"result\\\":{\\\"hit\\\":\\\"default\\\",\\\"cdn\\\":39}}\"}","common_trace":"{\"StrategyTrace\":{\"Neptune\":{\"PlayStream\":{\"ids\":null}}}}","app_id":"100100"},"data":{"md":{"main":{"flv":"https://pull-flv-l6-admin.douyincdn.com/stage/stream-403148414198480927_md.flv?k=c8e67602290f45ec&t=1716200263","hls":"http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_md/index.m3u8?k=3e6fb06ad658dd52&t=1716200263","cmaf":"","dash":"","lls":"http://pull-lls-l6.douyincdn.com/stage/stream-403148414198480927_md.sdp?k=4a195646166ee905&t=1716200263","tsl":"","tile":"","sdk_params":"{\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"VCodec\":\"h264\",\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"HurryType\":0,\"SlowMillisecond\":90,\"HurryTime\":3500,\"HurryStartMs\":4000,\"HurryMillisecond\":3500,\"HurrySpeed\":1.1,\"SlowSpeed\":1,\"SlowTime\":90,\"Enabled\":0,\"HurryStopType\":1},\"PlayingIntervalMs\":20000,\"vbitrate\":250000,\"resolution\":\"240x423\",\"gop\":4,\"drType\":\"sdr\"}"}},"hd":{"main":{"flv":"http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_hd.flv?k=3615e910de605aaa&t=1716200263","hls":"http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_hd/index.m3u8?k=b6cb2a9d0399385a&t=1716200263","cmaf":"","dash":"","lls":"http://pull-lls-l6.douyincdn.com/stage/stream-403148414198480927_hd.sdp?k=68057aff7c0bdf02&t=1716200263","tsl":"","tile":"","sdk_params":"{\"VCodec\":\"h264\",\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"HurryStopType\":1,\"HurryTime\":3500,\"SlowSpeed\":1,\"HurryStartMs\":4000,\"SlowTime\":90,\"HurryMillisecond\":3500,\"Enabled\":0,\"HurrySpeed\":1.1,\"HurryType\":0,\"SlowMillisecond\":90},\"PlayingIntervalMs\":20000,\"vbitrate\":2000000,\"resolution\":\"720x1270\",\"gop\":4,\"drType\":\"sdr\"}"}},"sd":{"main":{"flv":"http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_sd.flv?k=b781a267de429382&t=1716200263","hls":"http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_sd/index.m3u8?k=0f8db5603ed2af70&t=1716200263","cmaf":"","dash":"","lls":"http://pull-lls-l6.douyincdn.com/stage/stream-403148414198480927_sd.sdp?k=8653a21c3b48dc69&t=1716200263","tsl":"","tile":"","sdk_params":"{\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"HurrySpeed\":1.1,\"HurryStartMs\":4000,\"SlowMillisecond\":90,\"HurryStopType\":1,\"HurryTime\":3500,\"SlowSpeed\":1,\"HurryType\":0,\"Enabled\":0,\"HurryMillisecond\":3500,\"SlowTime\":90},\"PlayingIntervalMs\":20000,\"VCodec\":\"h264\",\"vbitrate\":1600000,\"resolution\":\"540x952\",\"gop\":4,\"drType\":\"sdr\"}"}},"origin":{"main":{"flv":"http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_or4.flv?k=96e8519599b43bf7&t=1716200263","hls":"http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_or4/index.m3u8?k=ba74aca1ba868d50&t=1716200263","cmaf":"","dash":"","lls":"http://pull-lls-l6.douyincdn.com/stage/stream-403148414198480927_or4.sdp?k=9a81a4b47346cf79&t=1716200263","tsl":"","tile":"","sdk_params":"{\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"HurryType\":0,\"SlowTime\":90,\"HurryStartMs\":4000,\"SlowMillisecond\":90,\"Enabled\":0,\"HurryMillisecond\":3500,\"SlowSpeed\":1,\"HurryStopType\":1,\"HurryTime\":3500,\"HurrySpeed\":1.1},\"PlayingIntervalMs\":20000,\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"VCodec\":\"h264\",\"vbitrate\":2015000,\"resolution\":\"1088x1920\",\"gop\":4,\"drType\":\"sdr\"}"}},"ld":{"main":{"flv":"http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_ld.flv?k=c364261a69a0a58d&t=1716200263","hls":"http://pull-hls-l6.douyincdn.com/stage/stream-403148414198480927_ld/index.m3u8?k=d7db0afc7d04d0ab&t=1716200263","cmaf":"","dash":"","lls":"http://pull-lls-l6.douyincdn.com/stage/stream-403148414198480927_ld.sdp?k=9603e6b78b354325&t=1716200263","tsl":"","tile":"","sdk_params":"{\"VCodec\":\"h264\",\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"HurrySpeed\":1.1,\"HurryStopType\":1,\"HurryTime\":3500,\"SlowTime\":90,\"HurryStartMs\":4000,\"HurryMillisecond\":3500,\"Enabled\":0,\"HurryType\":0,\"SlowMillisecond\":90,\"SlowSpeed\":1},\"PlayingIntervalMs\":20000,\"vbitrate\":1000000,\"resolution\":\"480x847\",\"gop\":4,\"drType\":\"sdr\"}"}},"ao":{"main":{"flv":"http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927.flv?k=9f57255a144e58ff&t=1716200263&only_audio=1","hls":"","cmaf":"","dash":"","lls":"","tsl":"","tile":"","sdk_params":"{\"P2PFastOpenDuration\":-1500,\"BufferDataMs\":1000,\"FastOpenDuration\":-500,\"NetworkAdapt\":{\"SlowTime\":90,\"SlowMillisecond\":90,\"HurryTime\":3500,\"SlowSpeed\":1,\"HurryType\":0,\"HurryStartMs\":4000,\"HurryStopType\":1,\"HurrySpeed\":1.1,\"HurryMillisecond\":3500,\"Enabled\":0},\"PlayingIntervalMs\":20000,\"VCodec\":\"h264\",\"vbitrate\":0,\"resolution\":\"\",\"gop\":2,\"drType\":\"sdr\"}"}}}}'
           version: 0
         size: ''
       provider: 0
@@ -1049,8 +1043,8 @@ data:
         ORIGION: "\u539F\u753B"
         SD1: "\u6807\u6E05"
         SD2: "\u9AD8\u6E05"
-      rtmp_pull_url: http://pull-l3.douyincdn.com/stage/stream-691588102361448530_or4.flv?auth_key=1716138034-0-0-549e912ae72b7418bbfa1d4e01716771
-      rtmp_pull_url_params: '{"PlayingIntervalMs":20000,"P2PFastOpenDuration":-1500,"BufferDataMs":1000,"VCodec":"h264","FastOpenDuration":-500,"NetworkAdapt":{"HurryStopType":1,"HurryTime":3500,"SlowMillisecond":90,"Enabled":0,"SlowTime":90,"HurrySpeed":1.1,"SlowSpeed":1,"HurryMillisecond":3500,"HurryType":0,"HurryStartMs":4000}}'
+      rtmp_pull_url: http://pull-flv-l6.douyincdn.com/stage/stream-403148414198480927_or4.flv?k=96e8519599b43bf7&t=1716200263
+      rtmp_pull_url_params: '{"FastOpenDuration":-500,"NetworkAdapt":{"HurryType":0,"SlowTime":90,"HurryStartMs":4000,"SlowMillisecond":90,"Enabled":0,"HurryMillisecond":3500,"SlowSpeed":1,"HurryStopType":1,"HurryTime":3500,"HurrySpeed":1.1},"PlayingIntervalMs":20000,"P2PFastOpenDuration":-1500,"BufferDataMs":1000,"VCodec":"h264"}'
       rtmp_push_url: ''
       rtmp_push_url_params: ''
       stream_control_type: 0
@@ -1058,14 +1052,14 @@ data:
       vr_type: 0
     sun_daily_icon_content: ''
     tags: []
-    title: "\u65B0\u4EBA\u76F4\u64AD\u7B2C\u4E00\u5929"
+    title: "\u679C\u679C\U0001F353\u6B63\u5728\u76F4\u64AD"
     title_recommend: false
     top_fans: []
     toutiao_cover_recommend_level: 0
     toutiao_title_recommend_level: 0
     upper_right_widget_data_list: []
     use_filter: false
-    user_count: 40
+    user_count: 0
     user_share_text: "#\u5728\u6296\u97F3\uFF0C\u8BB0\u5F55\u7F8E\u597D\u751F\u6D3B\
       #\u3010\u679C\u679C\U0001F353\u3011\u6B63\u5728\u76F4\u64AD\uFF0C\u6765\u548C\
       \u6211\u4E00\u8D77\u652F\u6301Ta\u5427\u3002\u590D\u5236\u4E0B\u65B9\u94FE\u63A5\
@@ -1077,8 +1071,8 @@ data:
     visibility_range: 0
     vs_main_replay_id: 0
     vs_roles: []
-    wait_copy: "\u8BE5\u6765\u7684\u59CB\u7EC8\u4F1A\u6765\uFF0C\u5343\u4E07\u522B\
-      \u592A\u7740\u6025"
+    wait_copy: "\u8010\u5FC3\u662F\u5E94\u4ED8\u4EFB\u4F55\u60C5\u51B5\u7684\u5DE7\
+      \u5999\u529E\u6CD5"
     web_count: 0
     webcast_comment_tcs: 0
     webcast_sdk_version: 0
@@ -1179,5 +1173,5 @@ data:
     with_commerce_permission: false
     with_fusion_shop_entry: false
 extra:
-  now: 1715535034880
+  now: 1715595463391
 status_code: 0
