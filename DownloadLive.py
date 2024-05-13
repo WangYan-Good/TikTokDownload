@@ -95,7 +95,7 @@ def auto_down (url: str, fp: str, retry_times: int):
         if retry_times != 0:
             file_name = fp + "_" + retry_times + ".flv"
         else:
-            file_name = fp
+            file_name = fp + ".flv"
         urllib.request.urlretrieve (url, file_name)
     except ContentTooShortError:
         retry_times += 1
