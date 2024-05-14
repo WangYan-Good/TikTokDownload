@@ -86,16 +86,15 @@ live_link = re.compile(r"\S*?https://live\.douyin\.com/([0-9]+)\S*?")  # 直播�
 live_link_self = re.compile(r"\S*?https://www\.douyin\.com/follow\?webRid=(\d+)\S*?")
 live_link_share = re.compile(r"\S*?https://webcast\.amemv\.com/douyin/webcast/reflow/\S+")
 
-Phone_headers = {
-    'User-Agent': 'com.ss.android.ugc.trill/494+Mozilla/5.0+(Linux;+Android+12;+2112123G+Build/SKQ1.211006.001;+wv)'
-                    '+AppleWebKit/537.36+(KHTML,+like+Gecko)+Version/4.0+Chrome/107.0.5304.105+Mobile+Safari/537.36'}
+# http://pull-flv-f26.douyincdn.com/stagereplay/stream-114726907443675823_or4.flv
+download_file_name = re.compile(r"\S*?http://pull-flv\S+\.douyincdn\.com/\S+(stream-[0-9]+_[a-z]+[0-9]*\.[a-z|0-9]+).*")
 
 def auto_down (url: str, fp: str, retry_times: int):
     try:
         if retry_times != 0:
             file_name = fp + "_" + retry_times + ".flv"
         else:
-            file_name = fp + ".flv"
+            file_name = download_file_name.findall(url)
         urllib.request.urlretrieve (url, file_name)
     except ContentTooShortError:
         retry_times += 1
