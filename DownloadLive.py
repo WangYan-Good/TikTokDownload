@@ -87,14 +87,15 @@ live_link_self = re.compile(r"\S*?https://www\.douyin\.com/follow\?webRid=(\d+)\
 live_link_share = re.compile(r"\S*?https://webcast\.amemv\.com/douyin/webcast/reflow/\S+")
 
 # http://pull-flv-f26.douyincdn.com/stagereplay/stream-114726907443675823_or4.flv
-download_file_name = re.compile(r"\S*?http://pull-flv\S+\.douyincdn\.com/\S+(stream-[0-9]+_[a-z]+[0-9]*\.[a-z|0-9]+).*")
+download_file_name = r"stream-(\d+)_(\w+)\.(?:flv|m3u8)"
+# re.compile(r"\S*?http://pull-flv\S+\.douyincdn\.com/\S+(stream-[0-9]+_[a-z]+[0-9]*\.[a-z|0-9]+).*")
 
 def auto_down (url: str, fp: str, retry_times: int):
     try:
         if retry_times != 0:
             file_name = fp + "_" + retry_times + ".flv"
         else:
-            file_name = download_file_name.findall(url)
+            file_name = fp + re.search(download_file_name, url).group()
         urllib.request.urlretrieve (url, file_name)
     except ContentTooShortError:
         retry_times += 1
@@ -113,7 +114,7 @@ def request_file (
     try:
         print("\n name:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n start download:".format(nickname, method, url, stream, proxies, headers, timeout))
         # urllib.request.urlretrieve(url, "/home/userid/Videos/" + nickname +".flv")
-        auto_down (url, "/home/userid/Videos/" + nickname, 0)
+        auto_down (url, "/mnt/share/md/md10/Vedio/douyin/live/", 0)
         print("\n name:{}\n url:{}\n download complete!\n".format(nickname, url))
         '''
         with request(method=method, url=url, stream=stream, proxies=proxies, headers=headers, timeout=timeout) as response:
@@ -267,8 +268,8 @@ if __name__ == "__main__":
             live = UserLive2Filter(res_js)
             print("主播昵称: {0} 开播时间: {1} 直播流清晰度: {2}".format(live.nickname, live.create_time, "、".join([f"{key}: {value}" for key, value in live.resolution_name.items()]),))
             print("直播ID: {0} 直播标题: {1} 直播状态: {2} 观看人数: {3}".format(live.web_rid, live.live_title, live.live_status, live.user_count))
-            with open("config/"+live.nickname+".yml", 'w') as f:
-                yaml.safe_dump(res_js, f)
+            # with open("config/"+live.nickname+".yml", 'w') as f:
+            #     yaml.safe_dump(res_js, f)
             # anchor = yaml.safe_load(response)
             # print(res_js)
 
