@@ -1,0 +1,11 @@
+verifyFp: null
+type_id: "0"
+live_id: "1"
+room_id: null
+sec_user_id: null
+version_code: "99.99.99"
+app_id: "1128"
+msToken: null
+X-Bogus: null
+live_api: "https://live.douyin.com/webcast/room/web/enter/"
+live_api_share: "https://webcast.amemv.com/webcast/room/reflow/info/"

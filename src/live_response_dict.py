@@ -6,17 +6,18 @@ sys.path.append(os.path.join(WORK_SPACE))
 import json
 ##<< test
 
+# base
 from pathlib import Path
 import yaml
-
 from requests import request
 from time import sleep
 from random import randint
-
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
-
 from re import compile
+
+# F2
+from f2.utils.xbogus import XBogus as XB
 
 LIVE_CONFIG_PATH = "config/live.yml"
 MAX_TIMEOUT = 10
@@ -38,10 +39,10 @@ class Live():
     self.live_config["live"]["live_link_share"] = url
     
     # request response url
-    self.live_config["live"]["response_url"] = self.get_response_url(url)
-    # print(self.live_config["live"]["response_url"]) 
-    # https://live.douyin.com/781763336930?room_id=7342521940575374106&enter_from_merge=web_share_link&enter_method=web_share_link&previous_page=app_code_link
-    
+    self.live_config["live"]["response_url"] = self.__get_response_url(url)    
+
+    # initialize X-Bogus
+    self.live_config["live"]["X-Bogus"] = self.live_config["live"]["response_url"]["X-Bogus"]
 
     # make sure root_id/web_rid
     if (u:=room_id_live_path.findall(self.live_config["live"]["response_url"]["path"])) is not None:
@@ -60,13 +61,16 @@ class Live():
     with open(LIVE_CONFIG_PATH, 'w') as f:
       yaml.safe_dump(self.live_config, f)
   
-  def get_response_url(self, share_url:str) -> dict:
+  def __get_response_url(self, share_url:str) -> dict:
     response_url = dict()
     # request url
     response = request("get", share_url, timeout=MAX_TIMEOUT, headers=self.live_config["live"]["headers"])
     
     # random delay
     sleep(randint(15, 45) * 0.1)
+    
+    # initialize X-Bogus
+    response_url["X-Bogus"] = XB(user_agent=self.live_config["live"]["headers"].get("User-Agent", "")).getXBogus(response.url)
 
     # response url
     url = urlparse(response.url)

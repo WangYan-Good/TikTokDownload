@@ -37,6 +37,7 @@ live:
     Referer: https://www.douyin.com/
     User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
       like Gecko) Chrome/104.0.0.0 Safari/537.36
+  X-Bogus: null
   hls_pull_url_map: null
   live_link_share: https://v.douyin.com/i2mmYRQp/
   nickname: null

@@ -11,7 +11,7 @@ from src.url_list_config import UrlListConfig
 # from src.application.main_web_UI import WebUI
 
 #download post command
-COMMAND_DOWNLOAD_POST = "python3 DouYinTool.py -c ./f2/f2/conf/app.yaml -M live"
+COMMAND_DOWNLOAD_POST = "python3 DouYinTool.py -c ./f2/f2/conf/app.yaml -M post"
 
 if __name__ == "__main__":
 
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     cf = UrlListConfig()
 
     # download post
-    for i in cf.getConfigList("live"):
+    for i in cf.getConfigList("post"):
         try:
             os.system(COMMAND_DOWNLOAD_POST + ' -u ' + i)
             # web_ui = WebUI().deal_live_data(i)
