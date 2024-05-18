@@ -100,6 +100,9 @@ class Live():
     # ['url', 'data']
     pass
 
+  def receive_live_stream_infomation (self):
+    pass
+
 if __name__ == "__main__":
   live_config = Live("https://v.douyin.com/iFemNNTW/")
   print(live_config.live_config)

@@ -202,8 +202,6 @@ if __name__ == "__main__":
     kwargs["headers"]["User-Agent"] = f2_conf["headers"].get("User-Agent", "")
     kwargs["headers"]["Referer"] = f2_conf["headers"].get("Referer", "")
 
-    # print(kwargs)
-
     live_list = cf.getConfigList("live")
     print("live count:{}\n list: {}".format(len(live_list), live_list))
 
