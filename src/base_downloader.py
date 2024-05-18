@@ -14,11 +14,12 @@ class BaseDownloader():
   headers["User-Agent"] = None
 
   def __init__(self, headers:dict = None) -> None:
-    
+    self.update_headers(headers)
+
+  def update_headers(self, headers:dict = None):
     if headers is None:
       self.headers = yaml.safe_load(Path(HEADERS_CONFIG).read_text(encoding="utf-8"))
 
-    print(self.headers)
-
 if __name__ == "__main__":
-  BaseDownloader()
+  base_downloader = BaseDownloader()
+  print(base_downloader.headers)
