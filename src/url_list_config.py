@@ -56,6 +56,7 @@ class UrlListConfig ():
         UrlList.append(Url[0])
         continue
     self.url_list.append(UrlList.copy())
+    context.close()
   
   def getConfigList(self, SectionName:str):
     # defination

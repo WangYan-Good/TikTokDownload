@@ -205,8 +205,7 @@ if __name__ == "__main__":
     # print(kwargs)
 
     live_list = cf.getConfigList("live")
-    live_list.append("https://v.douyin.com/i2mmYRQp/")
-    print("live list: {}".format(live_list))
+    print("live count:{}\n list: {}".format(len(live_list), live_list))
 
     for live_share_url in live_list:
         one_url = live_share_url # "https://v.douyin.com/iF32SFoa/" # live_share_url
