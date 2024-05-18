@@ -29,7 +29,7 @@ class LiveDownloader(BaseDownloader):
     self.__update_sec_user_id(live["response_url"]["query"].get("sec_user_id", ""))
 
     # initialize base downloader
-    self.headers = self.update_headers(headers=None)
+    self.update_headers()
 
     # initialize member
     self.verifyFp = self.__download_config["verifyFp"]

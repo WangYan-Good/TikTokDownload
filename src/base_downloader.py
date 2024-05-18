@@ -16,9 +16,10 @@ class BaseDownloader():
   def __init__(self, headers:dict = None) -> None:
     self.update_headers(headers)
 
-  def update_headers(self, headers:dict = None):
+  def update_headers(self, headers:dict = None) -> dict:
     if headers is None:
       self.headers = yaml.safe_load(Path(HEADERS_CONFIG).read_text(encoding="utf-8"))
+    return self.headers
 
 if __name__ == "__main__":
   base_downloader = BaseDownloader()
