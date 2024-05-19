@@ -19,7 +19,7 @@ from re import compile
 # F2
 from f2.utils.xbogus import XBogus as XB
 
-LIVE_CONFIG_PATH = "config/live.yml"
+LIVE_CONFIG_PATH = "config/douyin/live.yml"
 MAX_TIMEOUT = 10
 
 room_id_live_path = compile(r"/douyin/webcast/reflow/\S+")

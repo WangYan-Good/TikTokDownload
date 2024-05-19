@@ -1,7 +1,7 @@
 import re
 
 # config file path
-CONFIG_FILE = "config/conf.ini"
+CONFIG_FILE = "config/douyin/conf.ini"
 
 # section
 SECTION_REGULAR = "\[(.*?)\]"

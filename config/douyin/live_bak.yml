@@ -1,0 +1,13 @@
+live:
+  flv_pull_url: null
+  hls_pull_url_map: null
+  live_link_share: https://v.douyin.com/i2mmYRQp/
+  nickname: null
+  rid: true
+  room_id: &id001
+  - '7367950269759425315'
+  status: null
+  title: null
+  total_user_str: null
+  user_count_str: null
+  web_rid: null

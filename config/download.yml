@@ -1,0 +1,23 @@
+##
+## default download config
+##
+##>>------------------ base download config -------------------->>
+path: /mnt/share/md/md10/Vedio
+max_thread: 8
+folderize: true
+headers_config_path: "./headers.yml"
+platform: "douyin"
+login: true
+##<<------------------ base download config --------------------<<
+
+##<<--------------------- user login cofnig --------------------<<
+user_login_config_path: "./douyin/user.yml"
+##>>------------------------------------------------------------>>
+
+##>>------------------ douyin post download cofnig ------------->> # extesion from base download config
+post_download_config_path: null
+##<<------------------------------------------------------------<<
+
+##>>------------------ douyin live download cofnig ------------->> # extesion from base download config
+live_download_config_path: "./douyin/live.yml"
+##<<------------------------------------------------------------<<
