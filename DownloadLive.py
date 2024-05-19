@@ -115,70 +115,13 @@ def request_file (
         print("\n name:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n start download:".format(nickname, method, url, stream, proxies, headers, timeout))
         # urllib.request.urlretrieve(url, "/home/userid/Videos/" + nickname +".flv")
         auto_down (url, "/mnt/share/md/md10/Vedio/douyin/live/", 0)
-        print("\n name:{}\n url:{}\n download complete!\n".format(nickname, url))
-        '''
-        with request(method=method, url=url, stream=stream, proxies=proxies, headers=headers, timeout=timeout) as response:
-            # print(response)
-            if not (content := int(response.headers.get('content-length',  0))) and not False:
-                print("{u} 响应内容为空".format(u=url))
-                exit(1)
-            if response.status_code != 200:
-                print("{u} 响应码异常: {status_code}".format(url, response.status_code))
-                exit(1)
-            elif all((104857600, content, content > 104857600)):
-                print("文件大小超出限制，跳过下载")
-                exit(1)
-            print(response)
-            exit(1)
-        download()
-                    # download_file
-                        # temp,
-                        # actual,
-                        # show,
-                        # id_,
-                        # response,
-                        # content,
-                        # count,
-                        # progress
-        '''
-    
+        print("\n name:{}\n url:{}\n download complete!\n".format(nickname, url))    
     except Exception as e:
         print("request error: {err}".format(err=e))
         exit(1)
 
 def download():
     pass
-'''
-def download_file(
-        self,
-        temp: str,   # temp path
-        actual: str, # actual path
-        show: str,
-        id_: str,     # id
-        response,
-        content: int,
-        count: SimpleNamespace,
-        progress: Progress) -> bool:
-    task_id = progress.add_task(
-        show, total=content or None)
-    try:
-        with temp.open("wb") as f:
-            for chunk in response.iter_content(chunk_size=self.chunk):
-                f.write(chunk)
-                progress.update(task_id, advance=len(chunk))
-            progress.remove_task(task_id) 
-    except exceptions.ChunkedEncodingError:
-        progress.remove_task(task_id)
-        self.log.warning(f"{show} 由于网络异常下载中断")
-        self.delete_file(temp)
-        return False
-    self.save_file(temp, actual)
-    self.log.info(f"{show} 文件下载成功")
-    self.log.info(f"文件路径 {actual.resolve()}", False)
-    self.blacklist.update_id(id_)
-    self.add_count(show, id_, count)
-    return True
-'''
 
 if __name__ == "__main__":
     kwargs = dict()
@@ -265,16 +208,15 @@ if __name__ == "__main__":
             live = UserLive2Filter(res_js)
             print("主播昵称: {0} 开播时间: {1} 直播流清晰度: {2}".format(live.nickname, live.create_time, "、".join([f"{key}: {value}" for key, value in live.resolution_name.items()]),))
             print("直播ID: {0} 直播标题: {1} 直播状态: {2} 观看人数: {3}".format(live.web_rid, live.live_title, live.live_status, live.user_count))
-            # with open("config/"+live.nickname+".yml", 'w') as f:
-            #     yaml.safe_dump(res_js, f)
-            # anchor = yaml.safe_load(response)
-            # print(res_js)
+            with open("download/"+live.nickname+".yml", 'w') as f:
+                yaml.safe_dump(res_js, f)
+                f.close()
 
             if live.live_status != 2:
                 print("当前 {0} 直播已结束".format(live.nickname))
                 continue
                 
-            # 加入 user db
+            # 加入 anchor db
 
             # 创建下载任务
             task = ("get", res_js["data"]["room"]["stream_url"]["flv_pull_url"]["FULL_HD1"], live.nickname, True, f2_proxies, live_config.live_config["live"]["PC_headers"], 0)
