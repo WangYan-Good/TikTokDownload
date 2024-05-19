@@ -76,6 +76,12 @@ from urllib.parse import urlparse
 import yaml
 import json
 
+max_count = 0
+download_threading_count = int()
+live_list = list()
+active_download_status = list()
+active_download_list = list()
+
 #download post command
 COMMAND_DOWNLOAD_POST = "python3 DouYinTool.py -c ./f2/f2/conf/app.yaml"
 
@@ -112,10 +118,19 @@ def request_file (
     timeout = 10,
     ):
     try:
+        global download_threading_count
+        global active_download_status
+        global active_download_status
         print("\n name:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n start download:".format(nickname, method, url, stream, proxies, headers, timeout))
+        print("当前总下载数：{}".format(download_threading_count))
         # urllib.request.urlretrieve(url, "/home/userid/Videos/" + nickname +".flv")
         auto_down (url, "/mnt/share/md/md10/Vedio/douyin/live/", 0)
+        
+        # reset threading status
+        download_threading_count -= 1
+        active_download_status[list(live_list).index(one_url)] = False
         print("\n name:{}\n url:{}\n download complete!\n".format(nickname, url))    
+        print("当前总下载数：{}".format(download_threading_count))
     except Exception as e:
         print("request error: {err}".format(err=e))
         exit(1)
@@ -123,7 +138,76 @@ def request_file (
 def download():
     pass
 
-if __name__ == "__main__":
+def receive_live_stream(share_url:str):
+    try:            
+        live_config = Live(share_url)
+    except (
+            exceptions.ProxyError,
+            exceptions.SSLError,
+            exceptions.ChunkedEncodingError,
+            exceptions.ConnectionError,
+            exceptions.ReadTimeout):
+        print("分享链接 {url} 请求数据失败".format(url=share_url))
+
+    # config download parameter
+    download_params["verifyFp"] = VerifyFpManager.gen_verify_fp()
+    download_params["type_id"] = "0"
+    download_params["live_id"] = "1"
+    download_params["room_id"] = live_config.live_config["live"].get("room_id", "")
+    download_params["sec_user_id"] = live_config.live_config["live"]["response_url"]["query"].get("sec_user_id", "")
+    download_params["version_code"] = "99.99.99"
+    download_params["app_id"] = "1128"
+    download_params["msToken"] = TokenManager.gen_real_msToken()
+
+    respone = request ("get", one_url, timeout=10, headers=live_config.live_config["live"]["headers"])
+    download_params["X-Bogus"] = XB(user_agent=live_config.live_config["live"]["headers"].get("User-Agent", "")).getXBogus(respone.url)
+    download_params["live_api"] = "https://live.douyin.com/webcast/room/web/enter/"
+    download_params["live_api_share"] = "https://webcast.amemv.com/webcast/room/reflow/info/"
+    
+    # save download parameters
+    live_config.live_config["params"] = download_params
+
+    try:
+        # print("\n method:{}\n url:{}\n params:{}\n timeout:{}\n headers:{}\n".format("get", download_params["live_api_share"], live_config.live_config["params"], 10, live_config.live_config["live"]["PC_headers"]))
+        response = request(
+            method="get",
+            url=download_params["live_api_share"],
+            params=live_config.live_config["params"],
+            timeout=10,
+            headers=live_config.live_config["live"]["PC_headers"])
+        # 随机延时
+        sleep(randint(15, 45) * 0.1)
+    except (
+            exceptions.ProxyError,
+            exceptions.SSLError,
+            exceptions.ChunkedEncodingError,
+            exceptions.ConnectionError,
+    ):
+        print("网络异常，请求 {url}?{urlencode(download_params)} 失败")
+    except exceptions.ReadTimeout:
+        print("网络异常，请求 {url}?{urlencode(download_params)} 超时")
+        return None, None
+    return live_config, response
+
+def create_listener_downloader():
+    # 设置退出监听条件
+    if False:
+        return
+    
+    while True:
+        # 5 分钟轮询一次
+        sleep(60 * 5)
+        
+        # 检查 live list 状态
+        for url in live_list:
+            
+            # 如果当前 url 的状态为 true，表示正在下载
+            if active_download_status[live_list.index(url)]:
+                continue
+            
+            # 如果当前 url 的状态为 false，则检查当前 live 是否正在直播
+
+if __name__ == "__main__":    
     kwargs = dict()
     download_params = dict()
 
@@ -147,67 +231,21 @@ if __name__ == "__main__":
 
     live_list = cf.getConfigList("live")
     print("live count:{}\n list: {}".format(len(live_list), live_list))
+    active_download_status = [False] * len(live_list)
+    active_download_list = [None] * len(live_list)
+    download_threading_count = 0
 
     for live_share_url in live_list:
-        one_url = live_share_url # "https://v.douyin.com/iF32SFoa/" # live_share_url
-        # one_url = "https://v.douyin.com/i2mmYRQp/"
-        try:            
-            live_config = Live(one_url)
-        except (
-                exceptions.ProxyError,
-                exceptions.SSLError,
-                exceptions.ChunkedEncodingError,
-                exceptions.ConnectionError,
-                exceptions.ReadTimeout):
-            print("分享链接 {url} 请求数据失败".format(url=one_url))
-            # continue
-        # print("{url} = {reurl}".format(url=one_url, reurl=respone.url))
-        download_params["verifyFp"] = VerifyFpManager.gen_verify_fp()
-        download_params["type_id"] = "0"
-        download_params["live_id"] = "1"
-        download_params["room_id"] = live_config.live_config["live"].get("room_id", "")
-        download_params["sec_user_id"] = live_config.live_config["live"]["response_url"]["query"].get("sec_user_id", "")
-        download_params["version_code"] = "99.99.99"
-        download_params["app_id"] = "1128"
-        download_params["msToken"] = TokenManager.gen_real_msToken()
-
-        respone = request ("get", one_url, timeout=10, headers=live_config.live_config["live"]["headers"])
-        download_params["X-Bogus"] = XB(user_agent=live_config.live_config["live"]["headers"].get("User-Agent", "")).getXBogus(respone.url)
-        download_params["live_api"] = "https://live.douyin.com/webcast/room/web/enter/"
-        download_params["live_api_share"] = "https://webcast.amemv.com/webcast/room/reflow/info/"
-
-        live_config.live_config["params"] = download_params
-        # live_config.update_config()
-
-        try:
-            # print("\n method:{}\n url:{}\n params:{}\n timeout:{}\n headers:{}\n".format("get", download_params["live_api_share"], live_config.live_config["params"], 10, live_config.live_config["live"]["PC_headers"]))
-            response = request(
-                method="get",
-                url=download_params["live_api_share"],
-                params=live_config.live_config["params"],
-                timeout=10,
-                headers=live_config.live_config["live"]["PC_headers"])
-            # 随机延时
-            sleep(randint(15, 45) * 0.1)
-        except (
-                exceptions.ProxyError,
-                exceptions.SSLError,
-                exceptions.ChunkedEncodingError,
-                exceptions.ConnectionError,
-        ):
-            print("网络异常，请求 {url}?{urlencode(download_params)} 失败")
-        except exceptions.ReadTimeout:
-            print("网络异常，请求 {url}?{urlencode(download_params)} 超时")
-            exit(1)
-        # print(response)
+        one_url = live_share_url
         try:
             # 获取直播推流
+            live_config, response = receive_live_stream(one_url)
             res_js = response.json()
             # print(type(res_js))
-            print("\n")
+            # print("\n")
             live = UserLive2Filter(res_js)
-            print("主播昵称: {0} 开播时间: {1} 直播流清晰度: {2}".format(live.nickname, live.create_time, "、".join([f"{key}: {value}" for key, value in live.resolution_name.items()]),))
-            print("直播ID: {0} 直播标题: {1} 直播状态: {2} 观看人数: {3}".format(live.web_rid, live.live_title, live.live_status, live.user_count))
+            # print("主播昵称: {0} 开播时间: {1} 直播流清晰度: {2}".format(live.nickname, live.create_time, "、".join([f"{key}: {value}" for key, value in live.resolution_name.items()]),))
+            # print("直播ID: {0} 直播标题: {1} 直播状态: {2} 观看人数: {3}".format(live.web_rid, live.live_title, live.live_status, live.user_count))
             with open("download/"+live.nickname+".yml", 'w') as f:
                 yaml.safe_dump(res_js, f)
                 f.close()
@@ -220,7 +258,14 @@ if __name__ == "__main__":
 
             # 创建下载任务
             task = ("get", res_js["data"]["room"]["stream_url"]["flv_pull_url"]["FULL_HD1"], live.nickname, True, f2_proxies, live_config.live_config["live"]["PC_headers"], 0)
-            download_task = threading.Thread(target=request_file, args=task)
+            
+            # chache threading & status
+            active_download_list[list(live_list).index(one_url)] = threading.Thread(target=request_file, args=task)
+            active_download_status[list(live_list).index(one_url)] = True
+            download_threading_count += 1
+            
+            # start threading
+            download_task = active_download_list[list(live_list).index(one_url)]
             download_task.start()
 
         except exceptions.JSONDecodeError:
@@ -229,4 +274,6 @@ if __name__ == "__main__":
             else:
                 print("响应内容为空，可能是接口失效或者 Cookie 失效，请尝试更新 Cookie")
 
+    # 创建 live listener
+    # create_listener_downloader()
     print("all download task has been completed")
