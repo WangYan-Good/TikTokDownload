@@ -1,0 +1,14 @@
+##<<--------------------- user login cofnig --------------------<<
+login_config_file_name: login.yml
+
+##<<------------------ download cofnig -------------<<
+## post/live
+type: live
+
+##<<------------------ post download cofnig -------------<<
+
+##<<------------------ live download cofnig -------------<<
+live_download_config_file_name: live.yml
+
+##<<------------------ share link file -------------<<
+download_link_file_name: conf.ini
