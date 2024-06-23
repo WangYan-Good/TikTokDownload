@@ -10,14 +10,36 @@ import yaml as yml
 ##<<Third-part>>
 from basic_config import BASE_CONFIG_PATH, BasicConfig
 
+class Proxies():
+  ##
+  ## Declare and define default value
+  ##
+  http    = None
+  https   = None
+
+  def get_proxies(self)->dict:
+    px          = dict()
+    px["http"]  = self.http
+    px["https"] = self.https
+
+    return px
+
+  ##
+  ## Dump configuration
+  ##
+  def dump_config(self):
+    print("Proxies configuration:")
+    print("\thttp: {}".format(self.http))
+    print("\thttps: {}".format(self.https))
 
 class Login():
 
   ##
   ## Declare and define default value
   ##
-  cookie = ""
+  cookie  = ""
   msToken = ""
+  proxies = Proxies()
 
   ##
   ## Initialize and construc class
@@ -30,9 +52,11 @@ class Login():
     ## Parse configuration file
     ##
     try:
-      config = self.__parse_config(Path(path))
-      self.cookie = config.get("cookie", "")
-      self.msToken = config.get("msToken", "")
+      config             = self.__parse_config(Path(path))
+      self.cookie        = config.get("cookie", "")
+      self.msToken       = config.get("msToken", "")
+      self.proxies.http  = dict(config.get("proxies", "")).get("http", None)
+      self.proxies.https = dict(config.get("proxies", "")).get("https", None)
     except Exception as e:
       print(e)
   ##
@@ -59,6 +83,7 @@ class Login():
     print("Login configuration:")
     print("\tcookie: {}".format(self.cookie))
     print("\tmsToken: {}".format(self.msToken))
+    self.proxies.dump_config()
 
 
 if __name__ == "__main__":

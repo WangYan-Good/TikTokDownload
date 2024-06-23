@@ -4,6 +4,8 @@
 ##<<Base>>
 import abc
 from pathlib import Path
+import os
+import sys
 
 ##<<Extension>>
 import yaml as yml
@@ -16,7 +18,6 @@ from header import Header
 ##
 BASE_CONFIG_PATH = "config/base_config.yml"
 
-
 ##
 ## Defination sbstract class
 ##
@@ -25,9 +26,11 @@ class BasicConfig(abc.ABC):
   ##
   ## Declare and define default value
   ##
+  WORK_SPACE_PATH        = os.path.dirname(sys.path[0])
   save_path              = "./"
   max_thread             = 0
   folderize              = False
+  __base_config_name     = ""
   base_config_path       = ""
   platform               = ""
   login                  = False
@@ -36,6 +39,8 @@ class BasicConfig(abc.ABC):
   __download_config_name = ""
   download_config_path   = ""
   platform_config_path   = ""
+  generate_response_path = ""
+  save_response          = False
 
   ##
   ## The part of extension
@@ -62,21 +67,25 @@ class BasicConfig(abc.ABC):
       ##
       ## Construct configuration
       ##
-      self.save_path              = config.get("save_path", "./")
-      self.max_thread             = config.get("max_thread", 0)
-      self.folderize              = config.get("folderize", False)
-      self.base_config_path       = config.get("base_config_path", "")
-      self.platform               = config.get("platform", "")
-      self.login                  = config.get("login", False)
-      self.__headers_config_name  = config.get("headers_config_name", "")
-      self.__download_config_name = config.get("download_config_name", "")
+      self.save_path                = config.get("save_path", "./")
+      self.max_thread               = config.get("max_thread", 0)
+      self.folderize                = config.get("folderize", False)
+      self.__base_config_name       = config.get("base_config_name", "")
+      self.platform                 = config.get("platform", "")
+      self.login                    = config.get("login", False)
+      self.__headers_config_name    = config.get("headers_config_name", "")
+      self.__download_config_name   = config.get("download_config_name", "")
+      self.__generate_response_path = config.get("generate_response_path", "")
+      self.save_response            = config.get("save_response", False)
       
       ##
       ## Construct extension config path
       ##
-      self.platform_config_path = self.base_config_path + "/" + self.platform
+      self.base_config_path     = self.WORK_SPACE_PATH + "/" + self.__base_config_name
+      self.platform_config_path = self.WORK_SPACE_PATH + "/" + self.__base_config_name + "/" + self.platform
       self.header_config_path   = self.platform_config_path + "/" + self.__headers_config_name
       self.download_config_path = self.platform_config_path + "/" + self.__download_config_name
+      self.url_response_path    = self.WORK_SPACE_PATH + "/" + self.__base_config_name + "/" + self.__generate_response_path
 
     except Exception as e:
       print(e)
@@ -107,12 +116,13 @@ class BasicConfig(abc.ABC):
       pass
 
     print("Basic configuration:")
-    print("\tsave path: {}".format(self.save_path))
     print("\tmax thread: {}".format(self.max_thread))
     print("\tfolderize: {}".format(self.folderize))
-    print("\tbase config path: {}".format(self.base_config_path))
     print("\tplatform: {}".format(self.platform))
     print("\tlogin: {}".format(self.login))
-    print("\theaders config name: {}".format(self.__headers_config_name))
-    print("\tdownload config name: {}".format(self.__download_config_name))
+    print("\tsave response: {}".format(self.save_response))
+    print("\tsave path: {}".format(self.save_path))
+    print("\twork space path: {}".format(self.WORK_SPACE_PATH))
+    print("\tbase config path: {}".format(self.base_config_path))
     print("\tplatform config path: {}".format(self.platform_config_path))
+    print("\turl response path: {}".format(self.url_response_path))
