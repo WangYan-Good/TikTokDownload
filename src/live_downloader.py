@@ -37,7 +37,7 @@ class LiveDownloader(Downloader):
 
   def create_download_task(self, url):
     global download_threading_count
-    task = ("get", self.live_stream_url, self.save_path, self.live_stream_name, True, self.login_config.proxies.get_proxies(), self.live.header, self.live.timeout)
+    task = ("get", url, self.live_stream_url, self.save_path, self.live_stream_name, True, self.login_config.proxies.get_proxies(), self.live.header, self.live.timeout)
 
     ##
     ## chache threading & status
@@ -82,6 +82,7 @@ class LiveDownloader(Downloader):
 
 def __request_file__(
   method: str,
+  share_url: str,
   url: str,
   save_path: str,
   file_name: str,
@@ -95,17 +96,19 @@ def __request_file__(
   try:
     global download_threading_count
     global active_download_status
-    print("\n path:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n start download:".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
+    print("\nstart download:")
+    print("path:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
     print("当前总下载数：{}".format(download_threading_count))
     auto_down (url, save_path, file_name, 0)
     
     # reset threading status
     download_threading_count -= 1
-    active_download_status[list(live_list).index(url)] = False
+    active_download_status[list(live_list).index(share_url)] = False
     # print("\n name:{}\n url:{}\n download complete!\n".format(nickname, url))    
     print("当前总下载数：{}".format(download_threading_count))
   except Exception as e:
       print("request error: {err}".format(err=e))
+      print("\n path:{}\n url:{}\ndownload failed!!!".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
       return None
 
 def auto_down (url: str, fp: str, fn: str, retry_times: int):
