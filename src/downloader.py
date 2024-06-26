@@ -91,6 +91,8 @@ class Downloader(BasicConfig):
   live_stream_url            = ""
   live_stream_name           = ""
 
+  nickname                   = ""
+
   def __init__(self, path:Path = BASE_CONFIG_PATH) -> None:
     super().__init__(path)
     self.__generate_download_config()
@@ -270,6 +272,10 @@ class Downloader(BasicConfig):
       ##
       live_response_json = live_response.json()
       live_info = UserLive2Filter(live_response_json)
+      if live_info.nickname is not None:
+        self.nickname = live_info.nickname
+      else:
+        self.nickname = "Unknown"
       
       ##
       ## save live information
