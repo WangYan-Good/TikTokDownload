@@ -95,7 +95,7 @@ class LiveDownloader(Downloader):
 
   def download_live_stream(self, url:str):
     global download_threading_count
-    task = ("get", url, self.live_stream_url, self.save_path+"/"+self.nickname, self.live_stream_name, True, self.login_config.proxies.get_proxies(), self.live.header, self.live.timeout)
+    task = ("get", url, self.live_stream_url, self.save_path+"/"+self.nickname, self.live_stream_name, self.nickname, True, self.login_config.proxies.get_proxies(), self.live.header, self.live.timeout)
 
     ##
     ## cache threading & status
@@ -153,7 +153,7 @@ def __request_file__(
   url: str,
   save_path: str,
   file_name: str,
-  # nickname: str,
+  nickname: str,
   # params,
   stream: bool,
   proxies,
@@ -175,7 +175,7 @@ def __request_file__(
     # reset threading status
     download_threading_count -= 1
     active_download_status[list(live_list).index(share_url)] = False
-    # print("\n name:{}\n url:{}\n download complete!\n".format(nickname, url))    
+    print("name:{} \nurl:{} \ndownload complete!\n".format(nickname, url))    
     print("当前总下载数：{}".format(download_threading_count))
   except Exception as e:
       print("request error: {err}".format(err=e))
