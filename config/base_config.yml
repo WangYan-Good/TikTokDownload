@@ -1,0 +1,18 @@
+##
+## default download config
+##
+##>>------------------ base download config -------------------->>
+save_path: /mnt/nvme/Vedio
+max_thread: 0
+folderize: true
+base_config_name: "config"
+platform: "douyin"
+login: True
+save_response: true
+generate_response_path: "build"
+
+##>>------------------ network download config -------------------->>
+headers_config_name: "headers.yml"  # path = [platform] + [headers_config_path]
+
+##>>------------------ download config -------------------->>
+download_config_name: "download.yml"
