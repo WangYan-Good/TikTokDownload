@@ -2,19 +2,19 @@
 ##<< test
 import os
 import sys
-# WORK_SPACE = os.path.dirname(sys.path[0])
-# sys.path.append(os.path.join(WORK_SPACE))
 import yaml
 from pathlib import Path
 import threading
 import urllib.request
 from urllib.error import ContentTooShortError 
 
+# extension
+import pynput
+import keyboard
+
 # third part
 from downloader import Downloader, BASE_CONFIG_PATH
 from live_response_dict import Live
-
-# LIVE_DOWNLOAD_CONFIG = "config/live_download_config.yml"
 
 # time defination in Timer
 TIME_SECOND = 1
@@ -25,11 +25,10 @@ TIME_DAY    = TIME_HOUR * 24
 TIME_5_MINUTES = 5 * TIME_MINUTE
 
 
-max_count = 0
-live_list                = list()
-download_threading_count = int()
-active_download_status = list()
-active_download_list = list()
+# max_count = 0
+# live_list                = list()
+# active_download_status = list()
+# active_download_list = list()
 
 '''
 Basic configuration:
@@ -85,17 +84,29 @@ class LiveDownloader(Downloader):
   ## LiveDownloader default configuration
   ## TODO
   ##
-  # max_download_number    = 0
-  # current_download_count = 0
+  max_download_number    = 0
+  current_download_count = 0
   # active_download_task   = list()
 
   def __init__(self, path:Path = BASE_CONFIG_PATH) -> None:
     super().__init__(path)
-    self.listen_threading = threading.Timer(TIME_5_MINUTES, self.listen_inactived_live, args=self) #Thread(target=self.listen_inactived_live, args=self)
+    # self.listen_threading = threading.Timer(TIME_5_MINUTES, self.listen_inactived_live, args=self) #Thread(target=self.listen_inactived_live, args=self)
 
   def download_live_stream(self, url:str):
-    global download_threading_count
-    task = ("get", url, self.live_stream_url, self.save_path+"/"+self.nickname, self.live_stream_name, self.nickname, True, self.login_config.proxies.get_proxies(), self.live.header, self.live.timeout)
+    ##
+    ## Define local variable
+    ##
+    live_download_thread_dict = dict()
+    task = ("get", 
+            url, 
+            self.live_stream_url, 
+            self.save_path+"/"+self.nickname, 
+            self.live_stream_name, 
+            self.nickname, 
+            True, 
+            self.login_config.proxies.get_proxies(), 
+            self.live.header, 
+            self.live.timeout)
 
     ##
     ## cache threading & status
@@ -108,17 +119,43 @@ class LiveDownloader(Downloader):
     ##
     if self.actived_download_live_url_list.count(url) == 0:
        self.actived_download_live_url_list.append(url)
-       self.live_download_thread_list.append(active_download_list[self.download_url_list.index(url)])
-       self.live_share_url_download_status_list.append(True)    
+       live_download_thread_dict["thread"] = threading.Thread(target=self.__request_file__, args=task)
+       live_download_thread_dict["share_url"] = url
+       self.live_download_thread_list.append(live_download_thread_dict)
+       self.live_share_url_download_status_list.append(True)
+    else:
+       ##
+       ## update threading args
+       ##
+       for index in range(len(self.live_download_thread_list)):
+          if self.live_download_thread_list[index]["share_url"] == url:
+             
+            ##
+            ## check live download status
+            ##
+            if self.live_share_url_download_status_list[index] == True:
+               print("live {} download status is true, skiped".format(self.nickname))
+            else:
+               self.live_download_thread_list[index]["thread"] = threading.Thread(target=self.__request_file__, args=task)
+               self.live_share_url_download_status_list[index] = True
+            break
+          if index == len(self.live_download_thread_dict) - 1:
+             print("actived live {} is not found!\nurl: {}".format(self.nickname, self.live_stream_url))
+             raise IndexError
     
     ##
     ## start threading
     ##
-    download_task = active_download_list[self.download_url_list.index(url)]
-    download_threading_count += 1
-    download_task.start()
+    self.current_download_count += 1
+    for d in self.live_download_thread_list:
+      if (d["share_url"] == url):
+        d["thread"].start()
+        return
+    print("live {} does not dound {}".format(self.nickname, url))
+    raise IndexError   
 
   def listen_inactived_live(self):
+     print("Add download live {}".format(self.nickname))
      for url in self.download_url_list:
         ##
         ## check if share url live is actived
@@ -128,6 +165,10 @@ class LiveDownloader(Downloader):
         ##
         ## check wheather the url is actived in the past
         ##
+        print("download_url_list length: {}".format(len(self.download_url_list)))
+        print("actived_download_live_url_list length: {}".format(len(self.actived_download_live_url_list)))
+        print("live_share_url_download_status_list length: {}".format(len(self.actived_download_live_url_list)))
+        print("live_download_thread_list length: {}".format(len(self.live_download_thread_list)))
         if self.actived_download_live_url_list.count(url) >= 1:
            if self.live_share_url_download_status_list[thread_index] is False:
             thread_index = self.actived_download_live_url_list.index(url)
@@ -144,85 +185,87 @@ class LiveDownloader(Downloader):
         ##
         # self.actived_live_list.append()
 
-  def start_live_listener(self):
-     self.listen_threading.start()
+  # def start_live_listener(self):
+    #  self.listen_threading.start()
 
-def __request_file__(
-  method: str,
-  share_url: str,
-  url: str,
-  save_path: str,
-  file_name: str,
-  nickname: str,
-  # params,
-  stream: bool,
-  proxies,
-  headers: dict = None,
-  timeout = 10,
-  ):
-  try:
-    global download_threading_count
-    global active_download_status
-    print("\nstart download:")
-    print("path:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
-    print("当前总下载数：{}".format(download_threading_count))
+  def __request_file__(
+    self,
+    method: str,
+    share_url: str,
+    url: str,
+    save_path: str,
+    file_name: str,
+    nickname: str,
+    # params,
+    stream: bool,
+    proxies,
+    headers: dict = None,
+    timeout = 10,
+    ):
+    try:
+      print("\nstart download:")
+      print("path:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
+      print("当前总下载数：{}".format(self.current_download_count))
 
-    if not os.path.exists(save_path):
-        print("create directory {}".format(save_path))
-        os.makedirs(save_path, exist_ok=True)
-    auto_down (url, save_path, file_name, 0)
-    
-    # reset threading status
-    download_threading_count -= 1
-    active_download_status[list(live_list).index(share_url)] = False
-    print("name:{} \nurl:{} \ndownload complete!\n".format(nickname, url))    
-    print("当前总下载数：{}".format(download_threading_count))
-  except Exception as e:
-      print("request error: {err}".format(err=e))
-      print("\n path:{}\n url:{}\ndownload failed!!!".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
-      return None
+      if not os.path.exists(save_path):
+          print("create directory {}".format(save_path))
+          os.makedirs(save_path, exist_ok=True)
+      self.auto_down (url, save_path, file_name, 0)
+      
+      # reset threading status
+      self.current_download_count -= 1
+      for index in range(len(self.live_download_thread_list)):
+         if self.live_download_thread_list[index]["share_url"] == share_url:
+            self.live_share_url_download_status_list[index] = False
+            break
+         if index == len(self.live_download_thread_list) - 1:
+            print("live {} status does not found".format(share_url))
+            raise IndexError
+      print("name:{} \nurl:{} \ndownload complete!\n".format(nickname, url))    
+      print("当前总下载数：{}".format(self.current_download_count))
+    except Exception as e:
+        print("request error: {err}".format(err=e))
+        print("\n path:{}\n url:{}\ndownload failed!!!".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
+        return None
 
-def auto_down (url: str, fp: str, fn: str, retry_times: int):
-  try:
-      if retry_times == 0:
-          file_name = fp + "/" + fn
-      else:
-          file_name = fp + "/" + "re_" + retry_times + "_" + fn
-      urllib.request.urlretrieve (url, file_name)
-  except ContentTooShortError:
-      retry_times += 1
-      auto_down (url, fp, fn, retry_times)
+  def auto_down (self, url: str, fp: str, fn: str, retry_times: int):
+    try:
+        file_name = fp + "/" + fn
+        while os.path.exists(file_name):
+           file_name = fp + "/" + "re_" + str(retry_times) + "_" + fn
+           retry_times += 1
+        urllib.request.urlretrieve (url, file_name)
+    except ContentTooShortError:
+        self.auto_down (url, fp, fn, retry_times)
 
-  ##
-  ## Get attribute value
-  ## example: "$.data.room.owner.nickname"
-  ##
-  def _get_attr_value(self, jsonpath_expr):
-      expr = parse(jsonpath_expr)
-      # expr = parser.parse(jsonpath_expr)
-      result = expr.find(self._data)
-      if result:
-          return (
-              [match.value for match in result]
-              if len(result) > 1
-              else result[0].value
-          )
-      return None
+  def create_keyboard_response_thread(self):
+     args = (self)
+     keyboard.add_hotkey(hotkey='s', callback=self.start_download_all_live_url, args=args)
+     print("keyboard response event create succees!")
+
+  def start_download_all_live_url(self):
+     print("start download all live url!")
+     for share_url in self.download_url_list:
+       stream_url = self.get_douyin_live_download_stream(share_url)
+       if stream_url is None:
+         continue
+       self.download_live_stream(share_url)
+     
+     
 
 if __name__ == "__main__":
   live = LiveDownloader()
-  # live.dump_config()
-  live_list = live.download_url_list.copy()
-  active_download_status = [False] * len(live.download_url_list)
-  active_download_list = [None] * len(live.download_url_list)
-  download_threading_count = 0
+  # live_list = live.download_url_list.copy()
+  # active_download_status = [False] * len(live.download_url_list)
+  # active_download_list = [None] * len(live.download_url_list)
+  # self.current_download_count = 0
 
   for live_url in live.download_url_list:
     stream_url = live.get_douyin_live_download_stream(live_url)
     if stream_url is None:
       continue
-    # print(live.live_stream_name)
     live.download_live_stream(live_url)
 
-    # create threading to listen live download task
-    # live.start_live_listener()
+  # create threading to listen live download task
+  live.create_keyboard_response_thread()
+  # live.start_live_listener()
