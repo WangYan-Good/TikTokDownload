@@ -1,28 +1,6 @@
-##>> test
-##<< test
-import os
-import sys
-import yaml
 from pathlib import Path
-import threading
-import urllib.request
-from urllib.error import ContentTooShortError 
-
-# extension
-import pynput
-import keyboard
-
-# third part
-from downloader import Downloader, BASE_CONFIG_PATH
-from live_response_dict import Live
-
-# time defination in Timer
-TIME_SECOND = 1
-TIME_MINUTE = TIME_SECOND * 60
-TIME_HOUR   = TIME_MINUTE * 60
-TIME_DAY    = TIME_HOUR * 24
-
-TIME_5_MINUTES = 5 * TIME_MINUTE
+from basic_config import BASE_CONFIG_PATH
+from src.downloader import Downloader
 
 '''
 Basic configuration:
@@ -34,8 +12,8 @@ Basic configuration:
         base config path: /mnt/nvme/CodeSpace/OpenSource/TikTokDownload/config
         platform: douyin
         platform config path: /mnt/nvme/CodeSpace/OpenSource/TikTokDownload/config/douyin
-        save response: True -> user configuration
-        url response path: /mnt/nvme/CodeSpace/OpenSource/TikTokDownload/config/build
+        [-]save response: True -> user configuration
+        [-]url response path: /mnt/nvme/CodeSpace/OpenSource/TikTokDownload/config/build
 Header configuration:
         Referer: https://www.douyin.com/
         User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
@@ -46,178 +24,14 @@ Proxies configuration: -> user configuration
         http: None
         https: None
 Downloader configuration:
-        type: live
+        type: post
         download url: ['https://v.douyin.com/i2DeLnxH/', 'https://v.douyin.com/i21Ne6oS/', 'https://v.douyin.com/i2BHt2mE/', 'https://v.douyin.com/i2AA6GUK/', 'https://v.douyin.com/i2UJMdyQ/', 'https://v.douyin.com/i2yKQLWr/', 'https://v.douyin.com/i2yK7AmW/', 'https://v.douyin.com/i2yK4dwa/', 'https://v.douyin.com/i2yERBCA/', 'https://v.douyin.com/i2aFRVtP/', 'https://v.douyin.com/i2m2PHfU/', 'https://v.douyin.com/iYh1xLq7/', 'https://v.douyin.com/iFQTDaxn/', 'https://v.douyin.com/iFQTVDCH/', 'https://v.douyin.com/iFLBNPNw/', 'https://v.douyin.com/iFefCGHk/', 'https://v.douyin.com/iYe5jEhY/', 'https://v.douyin.com/iFeavMJ4/', 'https://v.douyin.com/iYy5CJLU/', 'https://v.douyin.com/iF32SFoa/', 'https://v.douyin.com/iFRy7hQT/', 'https://v.douyin.com/iFRf18G4/', 'https://v.douyin.com/iFemNNTW/', 'https://v.douyin.com/iY9jqpJ2/', 'https://v.douyin.com/iYHfd3fs/', 'https://v.douyin.com/iY9SWRRJ/', 'https://v.douyin.com/iY9DMX62/', 'https://v.douyin.com/i2uf4BYu/', 'https://v.douyin.com/i2ufkd96/', 'https://v.douyin.com/i2mmYRQp/', 'https://v.douyin.com/i2yvkKW3/', 'https://v.douyin.com/i2ywdvXS/', 'https://v.douyin.com/i2yKxrHU/', 'https://v.douyin.com/i2yK5HeW/', 'https://v.douyin.com/i2yEF2ah/', 'https://v.douyin.com/i2yKEYwh/', 'https://v.douyin.com/i2yKErho/', 'https://v.douyin.com/i2yENeMM/', 'https://v.douyin.com/i2PGPK3m/', 'https://v.douyin.com/i2PGv3Rb/', 'https://v.douyin.com/i2PtNWGu/', 'https://v.douyin.com/i2aGBqKR/', 'https://v.douyin.com/i2aGFoPs/', 'https://v.douyin.com/i2mLKthp/', 'https://v.douyin.com/i2VNCedS/', 'https://v.douyin.com/i2VM3W6o/', 'https://v.douyin.com/i2Vha8Lq/', 'https://v.douyin.com/i2bPGJqu/', 'https://v.douyin.com/i2b5YU7q/', 'https://v.douyin.com/i2b5A9mQ/', 'https://v.douyin.com/i2b5trX9/', 'https://v.douyin.com/i2bH67r8/', 'https://v.douyin.com/i2bHNCaF/', 'https://v.douyin.com/i2bXNumx/', 'https://v.douyin.com/i2gJR1Ta/', 'https://v.douyin.com/i2gXbA3c/', 'https://v.douyin.com/i2g4okCF/', 'https://v.douyin.com/i2goH5wo/', 'https://v.douyin.com/i2pF15f4/', 'https://v.douyin.com/i2pFFwfv/', 'https://v.douyin.com/i2pY9CHP/', 'https://v.douyin.com/i2pYxBQb/', 'https://v.douyin.com/i2pAqHSy/', 'https://v.douyin.com/i2pCNQfq/', 'https://v.douyin.com/i2sNPeF5/', 'https://v.douyin.com/i2sNWL52/', 'https://v.douyin.com/i2sN37gP/', 'https://v.douyin.com/i2sNE3tQ/', 'https://v.douyin.com/i2s2PLxH/', 'https://v.douyin.com/i2shQmjd/', 'https://v.douyin.com/i2s9qP4A/', 'https://v.douyin.com/i2s9xCym/', 'https://v.douyin.com/i2s9V47C/', 'https://v.douyin.com/i2sx2mRV/', 'https://v.douyin.com/i2sWhqSc/', 'https://v.douyin.com/i2sWSQd7/', 'https://v.douyin.com/i2sWvBrp/', 'https://v.douyin.com/i2svcvh9/', 'https://v.douyin.com/i2GB8NUy/', 'https://v.douyin.com/i2GBMudS/', 'https://v.douyin.com/i2GSqjUj/', 'https://v.douyin.com/i2GuxJoc/', 'https://v.douyin.com/i2GuAVpg/', 'https://v.douyin.com/i2GHEvqj/', 'https://v.douyin.com/i2go6kGT/']
 
 '''
+class PostDownloader(Downloader):
 
-# extension from Downloader
-class LiveDownloader(Downloader):
-
-  ##
-  ## Initialize user configuration
-  ##
-  max_download_thread       = 0
-  is_need_login             = True
-  folderize                 = True
-  download_save_path        = ""
-  is_need_save_response     = True
-  live_listener             = True
-  timeout                   = 0
-
-  ##
-  ## Downloader configuration
-  ##
-  live_download_thread_list           = list()
-  actived_download_live_url_list      = list()
-  live_share_url_download_status_list = list()
-  listen_threading                    = None
-  # nickname = ""
-
-  ##
-  ## LiveDownloader default configuration
-  ## TODO
-  ##
-  max_download_number    = 0
-  current_download_count = 0
-
-  def __init__(self, path:Path = BASE_CONFIG_PATH) -> None:
+  def __init__(self, path: Path = ...) -> None:
     super().__init__(path)
 
-  def download_live_stream(self, url:str):
-    ##
-    ## Define local variable
-    ##
-    live_download_thread_dict = dict()
-    task = ("get", 
-            url, 
-            self.live_stream_url, 
-            self.save_path+"/"+self.nickname, 
-            self.live_stream_name, 
-            self.nickname, 
-            True, 
-            self.login_config.proxies.get_proxies(), 
-            self.live.header, 
-            self.live.timeout)
-
-    ##
-    ## add a new download task
-    ##
-    if self.actived_download_live_url_list.count(url) == 0:
-       self.actived_download_live_url_list.append(url)
-       live_download_thread_dict["thread"] = threading.Thread(target=self.__request_file__, args=task)
-       live_download_thread_dict["share_url"] = url
-       self.live_download_thread_list.append(live_download_thread_dict)
-       self.live_share_url_download_status_list.append(True)
-    else:
-       ##
-       ## update threading args
-       ##
-       for index in range(len(self.live_download_thread_list)):
-          if self.live_download_thread_list[index]["share_url"] == url:
-             
-            ##
-            ## check live download status
-            ##
-            if self.live_share_url_download_status_list[index] == True:
-               print("live {} download status is true, skiped".format(self.nickname))
-            else:
-               self.live_download_thread_list[index]["thread"] = threading.Thread(target=self.__request_file__, args=task)
-               self.live_share_url_download_status_list[index] = True
-            break
-          if index == len(self.live_download_thread_list) - 1:
-             print("actived live {} is not found!\nurl: {}".format(self.nickname, self.live_stream_url))
-             raise IndexError
-    
-    ##
-    ## start threading
-    ##
-    self.current_download_count += 1
-    for d in self.live_download_thread_list:
-      if (d["share_url"] == url):
-        d["thread"].start()
-        return
-    print("live {} does not dound {}".format(self.nickname, url))
-    raise IndexError   
-
-  def __request_file__(
-    self,
-    method: str,
-    share_url: str,
-    url: str,
-    save_path: str,
-    file_name: str,
-    nickname: str,
-    stream: bool,
-    proxies,
-    headers: dict = None,
-    timeout = 10,
-    ):
-    try:
-      print("\nstart download:")
-      print("path:{}\n method:{}\n url:{}\n stram:{}\n proxies:{}\n headers:{}\n timeout:{}\n".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
-      print("当前总下载数：{}".format(self.current_download_count))
-
-      if not os.path.exists(save_path):
-          print("create directory {}".format(save_path))
-          os.makedirs(save_path, exist_ok=True)
-      self.auto_down (url, save_path, file_name, 0)
-      
-      # reset threading status
-      self.current_download_count -= 1
-      for index in range(len(self.live_download_thread_list)):
-         if self.live_download_thread_list[index]["share_url"] == share_url:
-            self.live_share_url_download_status_list[index] = False
-            break
-         if index == len(self.live_download_thread_list) - 1:
-            print("live {} status does not found".format(share_url))
-            raise IndexError
-      print("name:{} \nurl:{} \ndownload complete!\n".format(nickname, url))    
-      print("当前总下载数：{}".format(self.current_download_count))
-    except Exception as e:
-        print("request error: {err}".format(err=e))
-        print("\n path:{}\n url:{}\ndownload failed!!!".format(save_path + "/" + file_name, method, url, stream, proxies, headers, timeout))
-        return None
-
-  def auto_down (self, url: str, fp: str, fn: str, retry_times: int):
-    try:
-        file_name = fp + "/" + fn
-        while os.path.exists(file_name):
-           file_name = fp + "/" + "re_" + str(retry_times) + "_" + fn
-           retry_times += 1
-        urllib.request.urlretrieve (url, file_name)
-    except ContentTooShortError:
-        self.auto_down (url, fp, fn, retry_times)
-
-  def create_keyboard_response_thread(self):
-     while True:
-        opreation = input("option: ")
-        if opreation == 's':
-           threading.Thread(target=self.start_download_all_live_url).start()
-        elif opreation == 'q':
-           print("Exit listening")
-           break
-        elif opreation == 'exit':
-           exit(1)
-        else:
-           print("Please input a correct operation")
-
-  def start_download_all_live_url(self):
-     print("start download all live url!")
-     for share_url in self.download_url_list:
-       stream_url = self.get_douyin_live_download_stream(share_url)
-       if stream_url is None:
-         continue
-       self.download_live_stream(share_url)  
-
 if __name__ == "__main__":
-  live = LiveDownloader()
-
-  for live_url in live.download_url_list:
-    stream_url = live.get_douyin_live_download_stream(live_url)
-    if stream_url is None:
-      continue
-    live.download_live_stream(live_url)
-
-  listener = threading.Thread(target=live.create_keyboard_response_thread)
-  listener.start()
+  pass
