@@ -121,6 +121,7 @@ class LiveDownloader(Downloader):
             ##
             if self.live_share_url_download_status_list[index] == True:
                print("live {} download status is true, skiped".format(self.nickname))
+               return None
             else:
                self.live_download_thread_list[index]["thread"] = threading.Thread(target=self.__request_file__, args=task)
                self.live_share_url_download_status_list[index] = True
@@ -191,11 +192,13 @@ class LiveDownloader(Downloader):
 
   def create_keyboard_response_thread(self):
      while True:
-        opreation = input("option: ")
+        print("s: start scan live list")
+        print("q: exit live listener")
+        opreation = input("operation:")
         if opreation == 's':
            threading.Thread(target=self.start_download_all_live_url).start()
         elif opreation == 'q':
-           print("Exit listening")
+           print("Listener exit succeed!")
            break
         elif opreation == 'exit':
            exit(1)
