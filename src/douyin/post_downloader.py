@@ -1,6 +1,26 @@
+##<<Base>>
+import os
+import sys
+# import current path as work space
+WORK_SPACE = os.path.dirname(sys.path[0])
+sys.path.append(os.path.join(WORK_SPACE))
+
 from pathlib import Path
+from time import sleep
+from random import randint
+from requests import request
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
+
+##<Extension>>
+import yaml as yml
+
+##<<Third-part>>
+from header import Header
+from xbogus import XBogus as XB
 from basic_config import BASE_CONFIG_PATH
-from src.downloader import Downloader
+from douyin_downloader import DouyinDownloader
+from url_list_config import UrlListConfig
 
 '''
 Basic configuration:
@@ -28,10 +48,80 @@ Downloader configuration:
         download url: ['https://v.douyin.com/i2DeLnxH/', 'https://v.douyin.com/i21Ne6oS/', 'https://v.douyin.com/i2BHt2mE/', 'https://v.douyin.com/i2AA6GUK/', 'https://v.douyin.com/i2UJMdyQ/', 'https://v.douyin.com/i2yKQLWr/', 'https://v.douyin.com/i2yK7AmW/', 'https://v.douyin.com/i2yK4dwa/', 'https://v.douyin.com/i2yERBCA/', 'https://v.douyin.com/i2aFRVtP/', 'https://v.douyin.com/i2m2PHfU/', 'https://v.douyin.com/iYh1xLq7/', 'https://v.douyin.com/iFQTDaxn/', 'https://v.douyin.com/iFQTVDCH/', 'https://v.douyin.com/iFLBNPNw/', 'https://v.douyin.com/iFefCGHk/', 'https://v.douyin.com/iYe5jEhY/', 'https://v.douyin.com/iFeavMJ4/', 'https://v.douyin.com/iYy5CJLU/', 'https://v.douyin.com/iF32SFoa/', 'https://v.douyin.com/iFRy7hQT/', 'https://v.douyin.com/iFRf18G4/', 'https://v.douyin.com/iFemNNTW/', 'https://v.douyin.com/iY9jqpJ2/', 'https://v.douyin.com/iYHfd3fs/', 'https://v.douyin.com/iY9SWRRJ/', 'https://v.douyin.com/iY9DMX62/', 'https://v.douyin.com/i2uf4BYu/', 'https://v.douyin.com/i2ufkd96/', 'https://v.douyin.com/i2mmYRQp/', 'https://v.douyin.com/i2yvkKW3/', 'https://v.douyin.com/i2ywdvXS/', 'https://v.douyin.com/i2yKxrHU/', 'https://v.douyin.com/i2yK5HeW/', 'https://v.douyin.com/i2yEF2ah/', 'https://v.douyin.com/i2yKEYwh/', 'https://v.douyin.com/i2yKErho/', 'https://v.douyin.com/i2yENeMM/', 'https://v.douyin.com/i2PGPK3m/', 'https://v.douyin.com/i2PGv3Rb/', 'https://v.douyin.com/i2PtNWGu/', 'https://v.douyin.com/i2aGBqKR/', 'https://v.douyin.com/i2aGFoPs/', 'https://v.douyin.com/i2mLKthp/', 'https://v.douyin.com/i2VNCedS/', 'https://v.douyin.com/i2VM3W6o/', 'https://v.douyin.com/i2Vha8Lq/', 'https://v.douyin.com/i2bPGJqu/', 'https://v.douyin.com/i2b5YU7q/', 'https://v.douyin.com/i2b5A9mQ/', 'https://v.douyin.com/i2b5trX9/', 'https://v.douyin.com/i2bH67r8/', 'https://v.douyin.com/i2bHNCaF/', 'https://v.douyin.com/i2bXNumx/', 'https://v.douyin.com/i2gJR1Ta/', 'https://v.douyin.com/i2gXbA3c/', 'https://v.douyin.com/i2g4okCF/', 'https://v.douyin.com/i2goH5wo/', 'https://v.douyin.com/i2pF15f4/', 'https://v.douyin.com/i2pFFwfv/', 'https://v.douyin.com/i2pY9CHP/', 'https://v.douyin.com/i2pYxBQb/', 'https://v.douyin.com/i2pAqHSy/', 'https://v.douyin.com/i2pCNQfq/', 'https://v.douyin.com/i2sNPeF5/', 'https://v.douyin.com/i2sNWL52/', 'https://v.douyin.com/i2sN37gP/', 'https://v.douyin.com/i2sNE3tQ/', 'https://v.douyin.com/i2s2PLxH/', 'https://v.douyin.com/i2shQmjd/', 'https://v.douyin.com/i2s9qP4A/', 'https://v.douyin.com/i2s9xCym/', 'https://v.douyin.com/i2s9V47C/', 'https://v.douyin.com/i2sx2mRV/', 'https://v.douyin.com/i2sWhqSc/', 'https://v.douyin.com/i2sWSQd7/', 'https://v.douyin.com/i2sWvBrp/', 'https://v.douyin.com/i2svcvh9/', 'https://v.douyin.com/i2GB8NUy/', 'https://v.douyin.com/i2GBMudS/', 'https://v.douyin.com/i2GSqjUj/', 'https://v.douyin.com/i2GuxJoc/', 'https://v.douyin.com/i2GuAVpg/', 'https://v.douyin.com/i2GHEvqj/', 'https://v.douyin.com/i2go6kGT/']
 
 '''
-class PostDownloader(Downloader):
+MAX_TIMEOUT = 10
+class PostDownloader(DouyinDownloader):
 
   def __init__(self, path: Path = ...) -> None:
     super().__init__(path)
 
+  def query_share_url(self, url:str = "", timeout=MAX_TIMEOUT, header:Header = None):
+    response_url = dict()
+    ##
+    ## Preparetion
+    ##
+    self.live_link_share = url
+    self.timeout = timeout
+    self.header["Referer"] = header.referer
+    self.header["User-Agent"] = header.user_agent
+    response = request("get", self.live_link_share, timeout=self.timeout, headers=self.header)
+    self.x_bogus = XB(user_agent=self.header["User-Agent"]).getXBogus(response.url)
+
+    # random delay
+    sleep(randint(15, 45) * 0.1)
+
+    url = urlparse(response.url)
+    response_url["scheme"] = url.scheme
+    response_url["netloc"] = url.netloc
+    response_url["path"] = url.path
+    response_url["params"] = url.params
+
+    # url query
+    url_query = str(parse_qs(url.query)).replace("\\", "")
+    response_url["query"] = yml.safe_load(url_query)
+    return response_url
+
+  def dump_config(self, out_putlog_file: Path = False):
+    return super().dump_config(out_putlog_file)
+
+'''
+Steps:
+1. Analysis all shared url from configuration.
+2. Enmulate client to login server.
+3. Loop all shared url X.
+4. Create threading for the user who is related shared url X.
+5. Send shared url X to server and get all
+'''
 if __name__ == "__main__":
-  pass
+  post_downloader = PostDownloader()
+  
+  ##
+  ## 1. Analysis all shared url from configuration.
+  ##
+  post_download_url_list = UrlListConfig().getConfigList(SectionName="post")
+
+  ##
+  ## 2. Enmulate client to login server.
+  ##
+
+  ##
+  ## 3. Loop all shared url X.
+  ##
+  for share_url in post_download_url_list:
+    
+    ##
+    ## 4. Create threading for the user who is related shared url X.
+    ##
+
+    ##
+    ## 5. Send shared url X to server and get all
+    ##
+    
+    ##
+    ## Test
+    ## 1. load default configuration
+    ## 2. override configuration by user command
+    ##
+    print(share_url)
+    query_result = post_downloader.query_share_url(url=share_url, header=post_downloader.header)
+    print(query_result)
+    break

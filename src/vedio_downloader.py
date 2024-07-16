@@ -15,4 +15,8 @@ class VedioDownloader(Downloader):
   ## initialize
   ##
   def __init__(self, path:Path = BASE_CONFIG_PATH) -> None:
-    pass
+    super().__init__(path)
+
+if __name__ == "__main__":
+  vedio = VedioDownloader()
+  vedio.dump_config()

@@ -11,7 +11,7 @@ class UrlListConfig ():
 
   def __init__(self, file:str=CONFIG_FILE) -> None:
     self.section = list()
-    self.url_list = list(list())
+    self.__url_list = list(list())
     self._configParser(file)
 
   def _configParser (self, file:str=CONFIG_FILE):
@@ -34,7 +34,7 @@ class UrlListConfig ():
 
           # append url list into self
           if SectionName is not None and SectionFound is True:
-            self.url_list.append(UrlList.copy())
+            self.__url_list.append(UrlList.copy())
             UrlList.clear()
 
           # receive section 
@@ -53,7 +53,7 @@ class UrlListConfig ():
           # append url into url_list
           UrlList.append(Url[0])
           continue
-      self.url_list.append(UrlList.copy())
+      self.__url_list.append(UrlList.copy())
       context.close()
 
     except Exception as e:
@@ -68,11 +68,11 @@ class UrlListConfig ():
     
     SectionIndex = self.section.index(SectionName)
     if SectionIndex is not None:
-      return self.url_list[SectionIndex]
+      return self.__url_list[SectionIndex]
     else:
       return None
     
   def dump_url_list(self):
     print("Url share link:")
-    for sec in self.url_list:
+    for sec in self.__url_list:
       print("\t{}".format(sec))

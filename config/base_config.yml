@@ -2,7 +2,7 @@
 ## default download config
 ##
 ##>>------------------ base download config -------------------->>
-save_path: /mnt/nvme/vedio/live
+save_path: /mnt/nvme2/vedio/post
 max_thread: 0
 folderize: true
 base_config_name: "config"
