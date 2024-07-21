@@ -2,7 +2,9 @@
 ##<< test
 
 ##<<Base>>
+import os
 import abc
+import sys
 from pathlib import Path
 
 ##<<Extension>>
@@ -14,6 +16,7 @@ from basic_config import BasicConfig
 ##
 ## Eefine
 ##
+WORK_SPACE = sys.path[0]
 BASE_CONFIG_PATH = "config/base_config.yml"
 
 class Config(BasicConfig):
@@ -22,6 +25,8 @@ class Config(BasicConfig):
   ## Initialize class and generate configuration
   ##
   def __init__(self, path:Path = BASE_CONFIG_PATH):
+    sys.path.append(os.path.join(WORK_SPACE))
+    print(sys.path)
     if path is None:
       print("invalide configuration!")
     

@@ -25,19 +25,20 @@ class Header():
   ##
   def __init__(self, header_path:Path = None) -> None:
     if header_path is None:
-      return None
+      print("WARNNING: Invalide input, use default header")
     
     header_dict = dict()
-
     try:
       ##
       ## Load header configuration
       ##
-      header_dict = self.__parse_header(header_path)
+      if header_path is not None:
+        header_dict = self.__parse_header(header_path)
+        print("INFO: header initialized succeed!")
       self.referer = header_dict.get("Referer", DEFAULT_REFERER)
       self.user_agent = header_dict.get("User-Agent", DEFAULT_USERR_AGENT)
     except Exception as e:
-      print(e)
+      print("ERROR: Header init failed: {}".format(e))
       return None
     
   ##
@@ -45,7 +46,6 @@ class Header():
   ##
   def __parse_header(self, header_path:Path = None)->dict:
     if header_path is None:
-      print("Invalide header path")
       return None
     
     try:

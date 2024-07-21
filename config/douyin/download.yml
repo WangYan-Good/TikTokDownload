@@ -3,7 +3,7 @@ login_config_file_name: login.yml
 
 ##<<------------------ download cofnig -------------<<
 ## post/live
-type: live
+type: post
 
 ##<<------------------ post download cofnig -------------<<
 post_download_config_file_name: post.yml

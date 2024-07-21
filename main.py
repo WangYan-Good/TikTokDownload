@@ -4,7 +4,7 @@
 import os
 import sys
 
-WORK_SPACE = os.path.dirname(sys.path[0])
+WORK_SPACE = sys.path[0]
 sys.path.append(os.path.join(WORK_SPACE))
 
 def parse_user_command():
@@ -18,4 +18,5 @@ if __name__ == "__main__":
   ##
   ## Execute command
   ##
+  print(sys.path)
   pass

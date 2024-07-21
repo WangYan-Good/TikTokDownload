@@ -6,13 +6,13 @@ save_path: /mnt/nvme2/vedio/post
 max_thread: 0
 folderize: true
 base_config_name: "config"
-platform: "douyin"
+stream_platform: "douyin"
 login: True
 save_response: true
 generate_response_path: "build"
 
 ##>>------------------ network download config -------------------->>
-headers_config_name: "headers.yml"  # path = [platform] + [headers_config_path]
+headers_config_name: "headers.yml"  # path = [stream_platform] + [headers_config_path]
 
 ##>>------------------ download config -------------------->>
 download_config_name: "download.yml"

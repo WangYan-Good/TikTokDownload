@@ -1,10 +1,17 @@
 ##<<Base>>
 import os
 import sys
-# import current path as work space
+
+##
+## import current path as work space
+##
 WORK_SPACE = os.path.dirname(sys.path[0])
 sys.path.append(os.path.join(WORK_SPACE))
+# print(WORK_SPACE)
+# sys.path.append(os.path.join(WORK_SPACE))
+# sys.path.append(os.path.join(sys.path[0]))
 
+import re
 from pathlib import Path
 from time import sleep
 from random import randint
@@ -18,9 +25,11 @@ import yaml as yml
 ##<<Third-part>>
 from header import Header
 from xbogus import XBogus as XB
+from xbogus import XBogusManager as XBM
 from basic_config import BASE_CONFIG_PATH
 from douyin_downloader import DouyinDownloader
 from url_list_config import UrlListConfig
+from post_config import DouyinPostConfig
 
 '''
 Basic configuration:
@@ -51,47 +60,96 @@ Downloader configuration:
 MAX_TIMEOUT = 10
 class PostDownloader(DouyinDownloader):
 
-  def __init__(self, path: Path = ...) -> None:
+  ##
+  ## SEC UID regular expression
+  ##
+  USER_HOME_PAGE_URL_PREFIX = r"v.douyin.com"
+  DOUYIN_POST_URL_PATTERN = r"user/([^/?]*)"
+  DOUYIN_POST_REDIRECT_URL_PATTERN = r"sec_uid=([^&]*)"
+
+  ##
+  ## API
+  ##
+  API_USER_POST = r"https://www.douyin.com/aweme/v1/web/aweme/post/"
+
+  ##
+  ## Parameters
+  ##
+  sec_user_id = str()
+  max_cursor = int()
+  page_counts = int()
+  max_counts = int()
+  __douyin_post_config_dict = dict()
+
+  ##
+  ## class
+  ##
+  douyin_post_config = DouyinPostConfig()
+
+  def __init__(self, path: Path = BASE_CONFIG_PATH) -> None:
     super().__init__(path)
+    # self.max_cursor = self.__douyin_post_config_dict["max_cursor"]
+    # self.page_counts = self.__douyin_post_config_dict["page_counts"]
+    # self.max_counts = self.__douyin_post_config_dict["max_counts"]
 
   def query_share_url(self, url:str = "", timeout=MAX_TIMEOUT, header:Header = None):
     response_url = dict()
+    header_dict = dict()
     ##
     ## Preparetion
     ##
     self.live_link_share = url
     self.timeout = timeout
-    self.header["Referer"] = header.referer
-    self.header["User-Agent"] = header.user_agent
-    response = request("get", self.live_link_share, timeout=self.timeout, headers=self.header)
-    self.x_bogus = XB(user_agent=self.header["User-Agent"]).getXBogus(response.url)
+    if header is None:
+        header_dict["Referer"] = self.header.referer
+        header_dict["User-Agent"] = self.header.user_agent
+    else:
+        header_dict["Referer"] = header.referer
+        header_dict["User-Agent"] = header.user_agent
+    response = request("get", self.live_link_share, timeout=self.timeout, headers=header_dict)
+    self.x_bogus = XB(user_agent=header_dict["User-Agent"]).getXBogus(response.url)
 
     # random delay
     sleep(randint(15, 45) * 0.1)
+
+    if response.status_code in {200}:
+       pass
+    else:
+       print("ERROR: Query sec_uid failed")
 
     url = urlparse(response.url)
     response_url["scheme"] = url.scheme
     response_url["netloc"] = url.netloc
     response_url["path"] = url.path
     response_url["params"] = url.params
+    response_url["fragment"] = url.fragment
 
     # url query
     url_query = str(parse_qs(url.query)).replace("\\", "")
     response_url["query"] = yml.safe_load(url_query)
     return response_url
 
-  def dump_config(self, out_putlog_file: Path = False):
-    return super().dump_config(out_putlog_file)
+  def to_dict(self):
+    self.__douyin_post_config_dict = self.douyin_post_config.to_dict().copy()
+    # self.__douyin_post_config_dict["max_cursor"] = self.max_cursor
+    # self.__douyin_post_config_dict["max_counts"] = self.max_counts
+    # self.__douyin_post_config_dict["page_counts"] = self.page_counts
+    self.__douyin_post_config_dict["sec_user_id"] = self.sec_user_id
+    # self.__douyin_post_config_dict["nickname"] = self.nickname
+     
 
-'''
-Steps:
-1. Analysis all shared url from configuration.
-2. Enmulate client to login server.
-3. Loop all shared url X.
-4. Create threading for the user who is related shared url X.
-5. Send shared url X to server and get all
-'''
-if __name__ == "__main__":
+  def dump_config(self, out_putlog_file: Path = False):
+    super().dump_config(out_putlog_file)
+    self.douyin_post_config.dump_config()
+
+    print("Douyin POST Downloader Configuration:")
+    # print("\tmax cursor: {}".format(self.max_cursor))
+    # print("\tmax counts: {}".format(self.max_counts))
+    # print("\tpage counts: {}".format(self.page_counts))
+    print("\tsec user id: {}".format(self.sec_user_id))
+
+
+def download_test():
   post_downloader = PostDownloader()
   
   ##
@@ -121,7 +179,78 @@ if __name__ == "__main__":
     ## 1. load default configuration
     ## 2. override configuration by user command
     ##
-    print(share_url)
-    query_result = post_downloader.query_share_url(url=share_url, header=post_downloader.header)
+
+    ##
+    ## Get sec uid
+    ##
+    # share_url = 'https://www.douyin.com/user/MS4wLjABAAAA_IqUVAcx23x8fJZk0iJhmmyu8YytCUSkcZA33xW9198'
+    if post_downloader.USER_HOME_PAGE_URL_PREFIX in share_url:
+       query_result = post_downloader.query_share_url(url=share_url)
+       post_downloader.sec_user_id = query_result["query"]["sec_uid"]
+    else:
+       post_downloader.sec_user_id = re.search(pattern=post_downloader.DOUYIN_POST_URL_PATTERN, string=share_url).group(1)
+    print('sec_uid: {}'.format(post_downloader.sec_user_id))
+
+    ##
+    ## Query user home page
+    ##
+    '''
+    params = dict(post_downloader.max_cursor, post_downloader.page_counts, post_downloader.sec_user_id)
+    XBM.model_2_endpoint(post_downloader.header.user_agent, post_downloader.API_USER_POST,)
+    endpoint_url = None
+    request("get", )
+    '''
+    # print(post_downloader.douyin_post_config.to_dict())
+    print(post_downloader.dump_config())
+
+
+
+    break
+
+'''
+Steps:
+1. Analysis all shared url from configuration.
+2. Enmulate client to login server.
+3. Loop all shared url X.
+4. Create threading for the user who is related shared url X.
+5. Send shared url X to server and get all
+'''
+if __name__ == "__main__":
+   ##
+   ## for test, download post vedio
+   ##
+   download_test()
+'''
+  post_downloader = PostDownloader()
+  
+  ##
+  ## 1. Analysis all shared url from configuration.
+  ##
+  post_download_url_list = UrlListConfig().getConfigList(SectionName="post")
+
+  ##
+  ## 2. Enmulate client to login server.
+  ##
+
+  ##
+  ## 3. Loop all shared url X.
+  ##
+  for share_url in post_download_url_list:
+    
+    ##
+    ## 4. Create threading for the user who is related shared url X.
+    ##
+
+    ##
+    ## 5. Send shared url X to server and get all
+    ##
+    
+    ##
+    ## Test
+    ## 1. load default configuration
+    ## 2. override configuration by user command
+    ##
+    query_result = post_downloader.query_share_url(url=share_url)
     print(query_result)
     break
+'''
