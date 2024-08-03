@@ -1,18 +1,18 @@
 ##<<--------------------- user login cofnig --------------------<<
-login_config_file_name: login.yml
+login_config_file: login.yml
 
 ##<<------------------ download cofnig -------------<<
 ## post/live
-type: post
+type: live
 
 ##<<------------------ post download cofnig -------------<<
-post_download_config_file_name: post.yml
+post_download_config_file: post.yml
 
 ##<<------------------ live download cofnig -------------<<
-live_download_config_file_name: live.yml
+live_download_config_file: live.yml
 
 ##<<------------------ share link file -------------<<
-download_link_file_name: conf.ini
+share_url_file: conf.ini
 
 ##<<------------------ API -------------<<
 api:

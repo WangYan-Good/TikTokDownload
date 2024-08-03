@@ -1,1 +1,3 @@
 f2
+httpx
+gmssl>=3.2.2
